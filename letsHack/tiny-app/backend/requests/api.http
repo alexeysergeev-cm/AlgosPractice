@@ -1,4 +1,5 @@
 
+### create question
 POST http://127.0.0.1:5000/api/questions
 Content-Type: application/json
 
@@ -8,3 +9,20 @@ Content-Type: application/json
   "repo": "repo",
   "live": "live"
 }
+
+### view question
+GET  http://127.0.0.1:5000/api/questions
+Content-Type: application/json
+
+
+### edit question
+PATCH http://127.0.0.1:5000/api/questions/606f79f81fe31355a031d704
+Content-Type: application/json
+
+{
+  "answered": true
+}
+
+### delete question
+DELETE  http://127.0.0.1:5000/api/questions/606f541dea990a4c5daeb85f
+Content-Type: application/json
