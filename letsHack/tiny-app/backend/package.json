@@ -4,7 +4,9 @@
   "description": "a tuny app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "server:debug": "nodemon --inspect app.js"
   },
   "author": "Alexey Sergeev",
   "license": "ISC",
@@ -14,5 +16,8 @@
     "mongoose": "^5.12.3",
     "requests": "^0.3.0",
     "validator": "^13.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
