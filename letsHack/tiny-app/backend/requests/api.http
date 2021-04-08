@@ -1,0 +1,10 @@
+
+POST http://127.0.0.1:5000/api/questions
+Content-Type: application/json
+
+{
+  "name": "Alexey Sergeev",
+  "text": "This is a test",
+  "repo": "repo",
+  "live": "live"
+}
