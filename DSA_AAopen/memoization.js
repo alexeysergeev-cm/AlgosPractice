@@ -238,16 +238,36 @@ function pathFinder(directories, targetFile) {
 // minChange([1, 5, 10, 25], 15)    // => 2, because 10 + 5 = 15
 // minChange([1, 5, 10, 25], 100)   // => 4, because 25 + 25 + 25 + 25 = 100
 function minChange(coins, amount, memo = {}) {
-    if (amount in memo) return memo[amount]
-    if (amount === 0) return 0
+  if (amount in memo) return memo[amount]
+  if (amount <= 0) return 0
 
-    let numsCoins = [];
-    coins.forEach(coin => {
-        if (coin <= amount) numsCoins.push(minChange(coins, amount - coin, memo) + 1)
-    })
+  let numsCoins = [];
+  coins.forEach(coin => {
+    if (coin <= amount) numsCoins.push(minChange(coins, amount - coin, memo) + 1)
+  })
 
-    // console.log(numsCoins)
-    console.log(Math.min(numsCoins))
-    memo[amount] = Math.min(...numsCoins)
-    return memo[amount]
+  // console.log(numsCoins)
+  console.log(Math.min(numsCoins))
+  memo[amount] = Math.min(...numsCoins)
+  return memo[amount]
 }
+
+
+
+function change(amount, coins, memo={}) {
+  let key = amount + '-' + coins;
+  if (key in memo) return memo[key]
+  if (amount === 0) return 1;
+
+  let currCoin = coins[coins.length - 1];
+  let total = 0;
+
+  for (let i = 0; i * currCoin <= amount; i++){
+    total += change(amount - i * currCoin, coins.slice(0, -1), memo) //coins.pop() does not work
+  }
+
+  memo[key] = total
+  return memo[key]
+};
+
+console.log(change(500, [1, 2, 5, 6]))
