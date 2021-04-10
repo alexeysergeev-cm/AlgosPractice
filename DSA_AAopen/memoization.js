@@ -161,50 +161,81 @@ function flatten(data) {
 // 
 // Example:
 //
-// let desktop = {
-//     '/images': {
-//         'app_academy_logo.svg': null,
-//         '/parks': {
-//             'yosemite.jpeg': null,
-//             'acadia.jpeg': null,
-//             'yellowstone.png': null
-//         },
-//         '/pets': {
-//             'trixie_lou.jpeg': null,
-//             'rolo.jpeg': null,
-//             'opal.jpeg': null,
-//             'diana.jpeg': null,
-//         }
-//     },
-//     '/music': {
-//         'hey_programmers.mp3': null,
-//         '/genres': {
-//             '/rock': {
-//                 'everlong.flac': null,
-//                 'livin_on_a_prayer.mp3': null
-//             },
-//             '/hip_hop': {
-//                 'express_yourself.wav': null,
-//                 'ny_state_of_mind.mp3': null
-//             }
-//         }
-//     }
-// };
+let desktop = {
+    '/images': {
+        'app_academy_logo.svg': null,
+        '/parks': {
+            'yosemite.jpeg': null,
+            'acadia.jpeg': null,
+            'yellowstone.png': null
+        },
+        '/pets': {
+            'trixie_lou.jpeg': null,
+            'rolo.jpeg': null,
+            'opal.jpeg': null,
+            'diana.jpeg': null,
+        }
+    },
+    '/music': {
+        'hey_programmers.mp3': null,
+        '/genres': {
+            '/rock': {
+                'everlong.flac': null,
+                'livin_on_a_prayer.mp3': null
+            },
+            '/hip_hop': {
+                'express_yourself.wav': null,
+                'ny_state_of_mind.mp3': null
+            }
+        }
+    }
+};
 //
-// fileFinder(desktop, 'app_academy_logo.svg');     // => true
-// fileFinder(desktop, 'everlong.flac');            // => true
-// fileFinder(desktop, 'sequoia.jpeg');             // => false
+// console.log(fileFinder(desktop, 'app_academy_logo.svg'));     // => true
+// console.log(fileFinder(desktop, 'everlong.flac'));            // => true
+// console.log(fileFinder(desktop, 'sequoia.jpeg'));             // => false
+// console.log(fileFinder(desktop, 'seqsaduoia.jpeg'));             // => false
+// console.log(fileFinder(desktop, 'express_yourself.wav'));             // => false
+
+// function fileFinder(directories, targetFile) {
+    
+//   let stack = [directories]; //
+
+//   while (stack.length > 0) {
+//     currDir = stack.pop()
+//     let children = Object.keys(currDir)
+
+//     for (let i = 0; i < children.length; i++){
+//       const currentFilename = children[i]
+//       if (currentFilename === targetFile) return true;
+//       if (is_dir(currentFilename)){
+//         stack.push(currDir[currentFilename])
+//       }
+//     }
+//   }
+
+//   return false 
+// }
+
+//recurrsion
 function fileFinder(directories, targetFile) {
     
-    // if (directories === targetFile) return true;
+  for (const [key, value] of Object.entries(directories)){
+    
+    if (is_dir(key)){
+      if (fileFinder(value, targetFile)) {
+        return true 
+      }
+    } else {
+      if (key === targetFile) return true;
+    }
+  }
 
-    // for (let i in directories){
-    //     if (i[0] === '/') return fileFinder(directories[i], targetFile);
-    //     if (directories[i] === targetFile) return true;
+  return false 
+}
 
-    // }
-
-    // return false 
+function is_dir(dir){
+  return dir[0] === '/';
 }
 
 
@@ -233,7 +264,7 @@ function pathFinder(directories, targetFile) {
 //
 // Examples:
 //  
-// minChange([1, 2, 5], 11)         // => 3, because 5 + 5 + 1 = 11
+console.log(minChange([1, 2, 5], 11))         // => 3, because 5 + 5 + 1 = 11
 // minChange([1, 4, 5], 8))         // => 2, because 4 + 4 = 8
 // minChange([1, 5, 10, 25], 15)    // => 2, because 10 + 5 = 15
 // minChange([1, 5, 10, 25], 100)   // => 4, because 25 + 25 + 25 + 25 = 100
@@ -246,7 +277,7 @@ function minChange(coins, amount, memo = {}) {
     if (coin <= amount) numsCoins.push(minChange(coins, amount - coin, memo) + 1)
   })
 
-  // console.log(numsCoins)
+  console.log(numsCoins)
   console.log(Math.min(numsCoins))
   memo[amount] = Math.min(...numsCoins)
   return memo[amount]
@@ -270,4 +301,25 @@ function change(amount, coins, memo={}) {
   return memo[key]
 };
 
-console.log(change(500, [1, 2, 5, 6]))
+// console.log(change(50, [1, 2, 5, 6]))
+
+
+
+//insertion sort [2,1,3,4]
+
+function insertionSort(arr) {
+
+  for (let i = 1; i < arr.length; i++) {
+
+    const currElement = arr[i];
+    let j = i - 1;
+    while (j >= 0 && currElement < arr[j]) { // -1
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = currElement;
+  }
+  return arr;
+}
+
+// console.log(insertionSort([2,1,4,3]))
