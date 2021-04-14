@@ -55,3 +55,83 @@ function quickSort(array) {
     return [...leftSorted, pivot, ...rightSorted];
 }
 
+
+//radix sort for positive integers
+console.log(radixSort([1,213,51,6135,77235,734,75634,23345,90,43,2,341, 5]))
+
+
+function getMaxDigits(nums) {
+
+  const getIntLength = (num) => (num === 0) ? 1 : Math.floor(Math.log10(Math.abs(num))) + 1;
+
+  let maxDigits = 0;
+  for (let i = 0; i < nums.length; i++) {
+    maxDigits = Math.max(maxDigits, getIntLength(nums[i]));
+  }
+  return maxDigits;
+}
+
+function radixSort(arr) {
+
+  const getDigitFrom = (num, place) => Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+
+  if (!Array.isArray(arr)) {
+    return null;
+  }
+
+  let maxDigits = getMaxDigits(arr);
+  for (let k = 0; k < maxDigits; k++) {
+    let buckets = Array.from({length: 10}, () => []); // Array of empty arrays
+
+    for (let i = 0; i < arr.length; i++) {
+      let digit = getDigitFrom(arr[i], k);
+      buckets[digit].push(arr[i]);
+    }
+
+    arr = [].concat(...buckets);
+  }
+  return arr;
+}
+
+
+
+////countingSort
+console.log(countingSort([2,3,4,5,1], 5))
+function countingSort(arr, max) {
+  const result = [];
+  const counters = new Array(max + 1).fill(0);
+
+  for (let i = 0; i < arr.length; i++) {
+    counters[arr[i]]++;
+  }
+
+  for (let i = 0; i < counters.length; i++) {
+    while (counters[i] > 0) {
+      result.push(i);
+      counters[i]--;
+    }
+  }
+
+  return result;
+}
+
+
+///binarySearch 
+function binarySearch(array, target) {
+    if (array.length === 0) {
+        return false;
+    }
+
+    let midIdx = Math.floor(array.length / 2);
+    let leftHalf = array.slice(0, midIdx);
+    let rightHalf = array.slice(midIdx + 1);
+
+    if (target < array[midIdx]) {
+        return binarySearch(leftHalf, target);
+    } else if (target > array[midIdx]) {
+        return binarySearch(rightHalf, target);
+    } else {
+        return true;
+    }
+}
+
