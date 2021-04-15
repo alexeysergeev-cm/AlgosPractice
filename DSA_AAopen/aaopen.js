@@ -528,3 +528,81 @@ function balancedParens(str) {
 
   return stack.length === 0;
 }
+
+
+// [10, 12, 8, 2, 20] => min = 2; max = 20
+
+class Node {
+    constructor(val) {
+        this.value = val;
+        this.next = null;
+    }
+}
+
+// Refactor the regular Stack below into a MinMaxStack!
+class MinMaxStack {
+    constructor() {
+        this.top = null;
+        this.bottom = null;
+        this.length = 0;
+    }
+
+    push(val) {
+        const newNode = new Node(val);
+        if (!this.top) {
+            this.top = newNode;
+            this.bottom = newNode;
+        } else {
+            const temp = this.top;
+            this.top = newNode;
+            this.top.next = temp;
+        }
+        return ++this.length;
+    }
+
+    pop() {
+        if (!this.top) {
+            return null;
+        }
+        const temp = this.top;
+        if (this.top === this.bottom) {
+            this.bottom = null;
+        }
+        this.top = this.top.next;
+        this.length--;
+        return temp;
+    }
+
+    min(){
+        if (!this.top) return null;
+        if (this.top === this.bottom) {
+            return this.top
+        }
+
+        let min = this.top
+        let curr = this.top;
+        while(curr){
+            if (curr.value < min.value) min = curr;
+            curr = curr.next;
+        }
+        return min
+    }
+
+    max(){
+        if (!this.top) return null;
+        if (this.top === this.bottom) {
+            return this.top
+        }
+        let max = this.top
+        let curr = this.top
+        while (curr) {
+            if (curr.value > max.value) max = curr;
+            curr = curr.next
+        }
+        return max
+    }
+
+    size() {
+        return this.length;
+    }
+}
