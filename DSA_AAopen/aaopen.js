@@ -606,3 +606,24 @@ class MinMaxStack {
         return this.length;
     }
 }
+
+//reverse linkedlist
+function iterateAcrossLinkedListBackwards(linkedList) {
+    // TODO: Implement the iterateAcrossLinkedListBackwards function here
+
+    let res = [];
+    let head = linkedList.head;
+
+    while(head){
+        if (head.value === undefined) {
+            res.unshift('undefined');
+        } else if (head.value === null) {
+            res.unshift('null')
+        } else {
+            res.unshift(head.value);
+        }
+        head = head.next;
+    }
+
+    return res.join(' -> ')
+}
