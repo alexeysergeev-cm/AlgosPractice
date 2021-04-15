@@ -483,3 +483,48 @@ a.right = c;
 b.left = d;
 b.right = e;
 c.right = f;
+
+
+
+//balanced parens
+
+function balancedParens(str) {
+  if (!str.length) return true
+  let table = {
+    '(': 1,
+    ')': 1,
+    '{': 1,
+    '}': 1,
+    '[': 1,
+    ']': 1
+  }
+
+  const stack = [] //[(, (, ]
+  for(let i = 0; i < str.length; i++){
+    if (table[str[i]]) {
+      if (str[i] === ')') {
+        if (stack[stack.length -1] !== '(') {
+          return false
+        } else {
+          stack.pop();
+        }
+      } else if (str[i] === '}') {
+        if (stack[stack.length -1] !== '{') {
+          return false
+        } else {
+          stack.pop();
+        }
+      } else if (str[i] === ']') {
+        if (stack[stack.length -1] !== '[') {
+          return false
+        } else {
+          stack.pop();
+        }
+      } else {
+        stack.push(str[i]);
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
