@@ -441,3 +441,21 @@ class Queue {
     return this.length;
   }
 }
+
+
+var reverseList = function(head) {
+  if (!head) return head;
+  
+  let prev = head.next;
+  head.next = null;
+  return func(head, prev);
+  
+  function func(cur, prev) {
+    if (prev === null) {
+        return cur;
+    }
+    let tmp = prev.next;
+    prev.next = cur;
+    return func(prev, tmp)
+  }
+};
