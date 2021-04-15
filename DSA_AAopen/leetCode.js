@@ -155,3 +155,33 @@ var createTargetArray = function(nums, index) {
     
     return newArr;
 };
+
+
+
+var numJewelsInStones = function(jewels, stones) {
+    let hash = {}
+    let res = 0
+    for(let i = 0; i < jewels.length;i++){
+        hash[jewels[i]] = 1
+    }
+    
+    for(let j = 0; j < stones.length; j++){
+        if (hash[stones[j]]) res++
+    }
+    
+    return res
+    
+    //this is faster ?! why
+
+    
+//     const jewelsArr = jewels.split('')
+//     let res = 0;
+    
+    
+//     for(let i = 0; i< stones.length; i++){
+//         if (jewelsArr.includes(stones[i])) res++;        
+//     }
+
+        
+//     return res;
+};
