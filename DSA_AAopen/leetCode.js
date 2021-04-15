@@ -216,3 +216,34 @@ ParkingSystem.prototype.addCar = function(carType) {
     
     return false;
 };  
+
+
+// Given a balanced string s, split it in the maximum amount of balanced strings.
+
+// Return the maximum amount of split balanced strings.
+
+
+var balancedStringSplit = function(s) {
+    let res = 0;
+    
+    let lCount = 0
+    let rCount = 0;
+    
+    for(let i = 0; i < s.length; i++){
+        if (s[i] === 'R'){
+            rCount++;
+        }else{
+            lCount++;
+        }
+        if (s[i] === 'R' && lCount === rCount) {
+            res++;
+            lCount = 0
+            rCount = 0
+        }else if (s[i] === 'L' && rCount === lCount) {
+            res++;
+            rCount = 0
+            lCount = 0
+        }
+    }
+    return res
+};
