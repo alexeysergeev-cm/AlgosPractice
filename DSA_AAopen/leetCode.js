@@ -375,3 +375,23 @@ var hasCycle = function(head) {
     return false 
     
 };
+
+//traverse a tree
+
+class TreeNode {
+    constructor(val){
+        this.left = null;
+        this.right = null;
+        this.val = val
+    }
+}
+
+function inOrderArray(root) {
+    if(!root) return [];
+    return [...inOrderArray(root.left),  root.val, ...inOrderArray(root.right)]
+}
+
+function postOrderArray(root) {
+    if(!root) return [];
+    return [...postOrderArray(root.left), ...postOrderArray(root.right), root.val]
+}
