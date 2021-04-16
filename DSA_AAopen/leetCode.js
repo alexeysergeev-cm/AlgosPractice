@@ -247,3 +247,28 @@ var balancedStringSplit = function(s) {
     }
     return res
 };
+
+
+//Design an Ordered Stream
+var OrderedStream = function(n) {
+    this.stream = new Array(n)
+    this.idx = 0
+};
+
+// /** 
+//  * @param {number} idKey 
+//  * @param {string} value
+//  * @return {string[]}
+//  */
+OrderedStream.prototype.insert = function(idKey, value) {
+    
+    this.stream[idKey - 1] = value;
+    
+    const res = []
+    while (this.stream[this.idx]){
+        res.push(this.stream[this.idx++])
+    }
+   
+    return res
+    
+};
