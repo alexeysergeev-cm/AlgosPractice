@@ -311,3 +311,18 @@ var xorOperation = function(n, start) {
     
     return res
 };
+
+
+
+var smallerNumbersThanCurrent = function(nums) {
+    let sorted = [...nums];
+    sorted.sort((a,b) => a-b);
+    
+    let res = [];
+    for(let i = 0; i < nums.length; i++){
+        res.push(sorted.indexOf(nums[i]))
+    }
+
+    //let res = nums.map(num => sorted.indexOf(num))
+    return res;
+};
