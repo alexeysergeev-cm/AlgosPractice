@@ -255,6 +255,7 @@ var OrderedStream = function(n) {
     this.idx = 0
 };
 
+
 // /** 
 //  * @param {number} idKey 
 //  * @param {string} value
@@ -271,4 +272,21 @@ OrderedStream.prototype.insert = function(idKey, value) {
    
     return res
     
+};
+
+
+
+
+// Given a non-negative integer num, return the number of steps to reduce it to zero.
+//  If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+
+
+var numberOfSteps = function(num) {
+    
+    let res = 0;
+    while(num !== 0){
+        num % 2 === 0 ? num /= 2 : num -= 1
+        res++
+    }
+    return res
 };
