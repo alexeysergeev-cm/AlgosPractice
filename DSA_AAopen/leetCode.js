@@ -334,3 +334,28 @@ var smallerNumbersThanCurrent = function(nums) {
 var arrayStringsAreEqual = function(word1, word2) {
     return word1.join('') === word2.join('')
 };
+
+
+// You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.
+
+// Return the number of consistent strings in the array words.
+
+var countConsistentStrings = function(allowed, words) {
+    return res = words.map(word => word.split('').every(ele => allowed.includes(ele)) ? 1 : 0).filter(ele => ele === 1).length
+};
+
+
+
+///linked list has a cycle 
+//brute force
+var hasCycle = function(head) {
+    let arr = []
+    let curr = head
+    while(curr){
+        if (arr.includes(curr)) return true 
+        arr.push(curr)
+        curr = curr.next
+    }
+    return false
+    
+};
