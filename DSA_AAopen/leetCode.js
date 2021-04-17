@@ -462,3 +462,19 @@ var maximumUnits = function(boxTypes, truckSize) {
 
     return units;
 };
+
+
+//convert a number to a binary representaion
+//6 = '110'
+//10 = '1010'
+
+function convert(num){
+  if (num === 1) return '0'
+  let res = []
+  while(num >= 1){
+    (num % 2 === 0) ? res.unshift('0') : res.unshift('1');
+    num = Math.floor(num / 2)
+  }
+
+  return res.join('')
+}
