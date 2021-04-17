@@ -415,3 +415,50 @@ function buildTree(preorder, inorder) {
 
     return root;
 }
+
+//shuffle array with indices
+var restoreString = function(s, indices) {
+  
+    let res = [];
+    s.split('').forEach((ele,i) => res[indices[i]] = ele);
+    return res.join('')
+};
+
+
+//maximun units in the truck
+
+var maximumUnits = function(boxTypes, truckSize) {
+//     boxTypes.sort((a,b) => b[1]-a[1]);
+//     let res = 0;
+    
+//     for(let i = 0; i < boxTypes.length; i++){
+//         if (truckSize === 0) return res;
+//         if (boxTypes[i][0] <= truckSize){
+//             res += boxTypes[i][0] * boxTypes[i][1]
+//             truckSize -= boxTypes[i][0];
+//         } else {
+//             boxTypes[i][0] -= (boxTypes[i][0] - truckSize);
+//             res += boxTypes[i][0] * boxTypes[i][1]
+//             truckSize -= boxTypes[i][0];
+//         }
+//     }
+//     return res;
+    
+    
+    boxTypes.sort((a,b) => b[1]-a[1]);
+
+    let remaining = truckSize; //4, 3, 1
+    let units = 0; // 7
+
+    boxTypes.forEach((bType)=> {
+        let take = ( bType[0] < remaining ) ? bType[0] : remaining;
+        remaining-=take;
+        units+=(bType[1] * take);
+
+        if(remaining === 0) {
+            return;
+        }
+    })
+
+    return units;
+};
