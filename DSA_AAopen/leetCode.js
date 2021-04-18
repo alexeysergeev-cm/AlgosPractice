@@ -500,3 +500,11 @@ var mergeTwoLists = function(l1, l2) {
     curr.next = l1 || l2
     return head.next  
 };
+
+//merge 2 sorted arrays, modify nums1 in place;
+var merge = function(nums1, m, nums2, n) {
+    let arr = [...nums1.slice(0, m), ...nums2.slice(0, n)].sort((a,b) => a-b)
+    for(let i = 0; i < nums1.length; i++){
+        nums1[i] = arr[i]
+    }
+};
