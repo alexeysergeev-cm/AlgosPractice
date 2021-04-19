@@ -513,3 +513,20 @@ var merge = function(nums1, m, nums2, n) {
 var sortedSquares = function(nums) {
     return nums.map(num => num*num).sort((a,b) => a-b)
 };
+
+//pangram
+var checkIfPangram = function(sentence) {
+    if (sentence.length < 26) return false;
+    
+    const alpha = 'qwertyuiopasdfghjklzxcvbnm'
+    let arr = alpha.split('')
+    
+    const hash = {}
+    arr.forEach((ele, i) => hash[ele] = 1)
+    
+    sentence.split('').forEach(ele => {
+        hash[ele] -= 1;
+    })
+    
+    return Object.values(hash).every(ele => ele < 1)
+};
