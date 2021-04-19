@@ -661,3 +661,36 @@ function breadthFirstArray(root) {
     }
     return res
 }
+
+
+///tree height
+
+function treeHeight(root) {
+    if (!root) return -1
+    let res = 0;
+    let stack = [root];
+    while(stack.length){
+        let node = stack.pop();
+        if (node.left || node.right) res++;
+        if (node.right) stack.push(node.right);
+        if (node.left) stack.push(node.left)
+    }
+
+    return res
+}
+
+
+//tree_sum
+function treeSum(root) {
+    if (!root) return 0;
+    let sum = 0;
+    let queue = [root];
+    while(queue.length){
+        let node = queue.shift();
+        sum += node.val
+        if (node.left) queue.push(node.left)
+        if (node.right) queue.push(node.right)
+    }
+    return sum
+}
+
