@@ -627,3 +627,37 @@ function iterateAcrossLinkedListBackwards(linkedList) {
 
     return res.join(' -> ')
 }
+
+
+
+//depth
+
+function depthFirstSearch(root, targetVal) {
+    if (!root) return null;
+    let stack = [root]
+    while(stack.length){
+        let ele = stack.pop()
+        if (ele.val === targetVal) return ele
+
+        if (ele.right) stack.push(ele.right)
+        if (ele.left) stack.push(ele.left)
+    }
+    return null
+}
+
+
+//breadth
+function breadthFirstArray(root) {
+    if (!root) return null;
+
+    let queue = [root]
+    let res = []
+    while (queue.length){
+        let ele = queue.shift();
+        res.push(ele.val)
+        if (ele.left) queue.push(ele.left)
+        if (ele.right) queue.push(ele.right)
+        
+    }
+    return res
+}
