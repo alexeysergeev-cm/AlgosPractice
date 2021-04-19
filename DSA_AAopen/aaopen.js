@@ -667,16 +667,19 @@ function breadthFirstArray(root) {
 
 function treeHeight(root) {
     if (!root) return -1
-    let res = 0;
-    let stack = [root];
-    while(stack.length){
-        let node = stack.pop();
-        if (node.left || node.right) res++;
-        if (node.right) stack.push(node.right);
-        if (node.left) stack.push(node.left)
-    }
+    // let res = 0;
+    // let stack = [root];
+    // while(stack.length){
+    //     let node = stack.pop();
+    //     if (node.left || node.right) res++;
+    //     if (node.right) stack.push(node.right);
+    //     if (node.left) stack.push(node.left)
+    // }
 
-    return res
+    // return res
+
+    //recurrsion
+    return 1 + (Math.max(treeHeight(root.left), treeHeight(root.right)))
 }
 
 
@@ -697,3 +700,67 @@ function treeSum(root) {
     // return treeSum(root.left) + root.val + treeSum(root.right)
 }
 
+///BST
+
+class TreeNode {
+    constructor(val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+
+class BST {
+    constructor(){
+        this.root = null;
+    }
+
+    insert(val, root = this.root){
+        const node = new TreeNode(val)
+        if (!this.root){
+            this.root = node
+            return 
+        }
+
+        if (val < root.val){
+            if (!root.left) {
+                root.left = node;
+            } else {
+                this.insert(val, root.left)
+            }
+        } else {
+            if (!root.right) {
+                root.right = node;
+            } else {
+                this.insert(val, root.right)
+            }
+        }
+    }
+
+    searchRecur(val, root = this.root){
+        if (!root) return false;
+
+        if (val < root.val){
+            return this.searchRecur(val, root.left)
+        } else if (val > root.val) {
+            return this.searchRecur(val, root.right)
+        } else {
+            return true
+        }
+    }
+    
+    searchIter(val, root = this.root){
+        if (!root) return false;
+
+        let stack = [root];
+        while(stack.length) {
+            let node = stack.pop();
+            if (node.val === val) return true;
+            if (node.right) stack.push(node.right)
+            if (node.left) stack.push(node.left)
+        }
+
+        return false;
+    }
+}
