@@ -692,5 +692,8 @@ function treeSum(root) {
         if (node.right) queue.push(node.right)
     }
     return sum
+
+    // recurrsion
+    // return treeSum(root.left) + root.val + treeSum(root.right)
 }
 
