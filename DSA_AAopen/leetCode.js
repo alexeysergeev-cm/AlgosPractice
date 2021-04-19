@@ -530,3 +530,27 @@ var checkIfPangram = function(sentence) {
     
     return Object.values(hash).every(ele => ele < 1)
 };
+
+
+//construct a binary tree
+var sortedArrayToBST = function(nums) {
+    if (!nums.length) return null;
+    
+    let midIdx = Math.floor(nums.length / 2)
+    let node = new TreeNode(nums[midIdx])
+    node.left = sortedArrayToBST(nums.slice(0, midIdx))
+    node.right = sortedArrayToBST(nums.slice(midIdx + 1))
+    
+    return node
+};
+
+//if balanced tree?
+function isHeight(root){
+    if (!root) return -1;
+    return 1 + Math.max(isHeight(root.left), isHeight(root.right));
+}
+var isBalanced = function(root) {
+    if (!root) return true;
+    let difference = Math.abs(isHeight(root.left) - isHeight(root.right)) <= 1
+    return difference && isBalanced(root.left) && isBalanced(root.right)
+};
