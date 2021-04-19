@@ -508,3 +508,8 @@ var merge = function(nums1, m, nums2, n) {
         nums1[i] = arr[i]
     }
 };
+
+//
+var sortedSquares = function(nums) {
+    return nums.map(num => num*num).sort((a,b) => a-b)
+};
