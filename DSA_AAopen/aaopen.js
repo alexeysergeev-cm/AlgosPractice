@@ -973,4 +973,50 @@ class Trie {
             return false;
         }
     }
+    
+}
+
+
+/// graphs 
+
+function breadthFirstSearch(startingNode, targetVal) {
+    if (!startingNode) return null
+    console.log(startingNode)
+    if (startingNode.val === targetVal) return startingNode;
+    
+    let visited = new Set()
+    let queue = [startingNode]
+    while (queue.length) {
+        let node = queue.shift();
+
+        if (!visited.has(node.val)){
+            visited.add(node.val)
+        } else {
+            continue;
+        }
+        if (node.val === targetVal) return node;
+        queue.push(...node.neighbors)
+    }
+    return null; 
+}
+
+//max value in graph
+
+function maxValue(node, visited=new Set()) {
+    if (!node) return null
+
+    let res = [];
+    let queue = [node]
+    while (queue.length) {
+        let node1 = queue.shift();
+
+        if (!visited.has(node1.val)){
+            visited.add(node1.val)
+        } else {
+            continue;
+        }
+        res.push(node1.val)
+        queue.push(...node1.neighbors)
+    }
+    return Math.max(...res); 
 }
