@@ -554,3 +554,8 @@ var isBalanced = function(root) {
     let difference = Math.abs(isHeight(root.left) - isHeight(root.right)) <= 1
     return difference && isBalanced(root.left) && isBalanced(root.right)
 };
+
+/// 
+var findKthLargest = function(nums, k) {
+    return nums.sort((a,b) => a-b)[nums.length - k]
+};
