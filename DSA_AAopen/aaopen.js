@@ -1020,3 +1020,24 @@ function maxValue(node, visited=new Set()) {
     }
     return Math.max(...res); 
 }
+
+//num regions graph
+
+function numRegions(graph) {
+    let res = 0;
+    const visited = new Set()
+
+    for(let node in graph){
+    if(depthFirst(node, graph, visited)) res++
+    }
+    return res
+}
+
+function depthFirst(node, graph, visited){
+    if (visited.has(node)) return false 
+    visited.add(node)
+
+    graph[node].forEach(neighbor => depthFirst(neighbor, graph, visited))
+
+    return true 
+}
