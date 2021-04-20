@@ -1041,3 +1041,114 @@ function depthFirst(node, graph, visited){
 
     return true 
 }
+
+//can finish courses
+
+var canFinish = function(numCourses, prerequisites) {
+    let prereq = buildGraph(prerequisites);
+    let totalCourses = Object.keys(prereq).length;
+    let completed = new Set();
+    
+    let eligibleCourseExists = true
+    
+    while(eligibleCourseExists){
+        eligibleCourseExists = false;
+        
+        for(let course in prereq) {
+            console.log(prereq, course)
+            let everyPreBeenMet = prereq[course].every((pre) => completed.has(pre));
+            if (!completed.has(course) && everyPreBeenMet) {
+                eligibleCourseExists = true;
+                completed.add(course);
+            }
+        }
+    }
+    
+    return completed.size === totalCourses;
+};
+
+function buildGraph(list){
+    let graph = {};
+    list.forEach((prereq) => {
+        let [ course, pre ] = prereq.map(String);
+        if (course in graph){
+            graph[course].push(pre);
+        } else {
+            graph[course] = [ pre ];
+        }
+        
+        if (!(pre in graph)){
+            graph[pre] = [];
+        }
+    });
+    
+    return graph;
+}
+
+
+
+///max heap
+class MaxHeap {
+    constructor(){
+        this.array = [null];
+    }
+
+    getParent(idx){
+        return Math.floor(idx / 2)
+    }
+
+    getLeftChild(idx){
+        return 2 * idx 
+    }
+
+    getRightChild(idx){
+        return 2 * idx + 1
+    }
+
+    siftUp(idx){
+        if (idx === 1) return;
+
+        let parent = Math.floor(idx / 2)
+        if (this.array[idx] > this.array[parent]){
+            [this.array[idx], this.array[parent]] = [this.array[parent], this.array[idx]]
+            this.siftUp(parent)
+        }
+    }
+
+    insert(val){
+        this.array.push(val)
+        this.siftUp(this.array.length - 1)
+    }
+
+    siftDown(idx){
+        let ary = this.array;
+        let leftIdx = this.getLeftChild(idx);
+        let rightIdx = this.getRightChild(idx); 
+        let leftVal = ary[leftIdx];
+        let rightVal = ary[rightIdx];
+
+        if (leftVal === undefined) leftVal = -Infinity;
+        if (rightVal === undefined) rightVal = -Infinity;
+    
+        if (ary[idx] > leftVal && ary[idx] > rightVal) return;
+    
+        if (leftVal < rightVal) {
+          var swapIdx = rightIdx;
+        } else {
+          var swapIdx = leftIdx;
+        }
+    
+        [ ary[idx], ary[swapIdx] ] = [ ary[swapIdx], ary[idx] ];
+        this.siftDown(swapIdx);
+    }
+
+    deleteMax(){
+        if (this.array.length === 2) return this.array.pop();
+        if (this.array.length === 1) return null;
+        
+        let max = this.array[1]
+        this.array[1] = this.array.pop()
+        this.siftDown(1);
+        return max
+    }
+}
