@@ -593,3 +593,9 @@ var isPerfectSquare = function(num) {
     
     return (num ** (1/2)) % 1 === 0;
 };
+
+
+var mySqrt = function(x) {
+    return Math.floor(x**0.5)
+    return Math.floor(Math.sqrt(x))
+};
