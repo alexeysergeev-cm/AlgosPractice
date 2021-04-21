@@ -559,3 +559,37 @@ var isBalanced = function(root) {
 var findKthLargest = function(nums, k) {
     return nums.sort((a,b) => a-b)[nums.length - k]
 };
+
+
+//
+var subtractProductAndSum = function (n) {
+    return calc(n, 0) - calc(n, 1)
+};
+
+function calc(n, i) {
+    if (i === 0) {
+        return n.toString().split("").reduce((acc, ele) => parseInt(acc) * parseInt(ele))
+    } else {
+        return n.toString().split("").reduce((acc, ele) => parseInt(acc) + parseInt(ele))
+    }
+}
+
+
+
+//perfect square
+
+var isPerfectSquare = function(num) {
+//     if (num === 1) return true
+
+//     const i = num / 2
+//     let j = 1
+//     while (j <= i){
+//         if (j*j === num) return true
+//         j++
+//     }
+//     return false 
+    
+    // return Math.round(10**(Math.log10(num) / 2)) ** 2 === num
+    
+    return (num ** (1/2)) % 1 === 0;
+};
