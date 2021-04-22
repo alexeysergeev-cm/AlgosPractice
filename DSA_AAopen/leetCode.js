@@ -631,3 +631,25 @@ var numberOfMatches = function (n) {
     if (n === 1) return 0;
     return (n % 2) ? (n - 1) / 2 + numberOfMatches((n - 1) / 2 + 1) : (n / 2) + numberOfMatches(n / 2)
 };
+
+
+//delete node (head is not provided)
+
+var deleteNode = function(node) {
+    node.val = node.next.val
+    node.next = node.next.next
+};
+
+
+/// find intersection 
+var getIntersectionNode = function(headA, headB) {
+    
+    if (!headA || !headB) return null;
+    var curA = headA;
+    var curB = headB;
+    while (curA != curB) {
+        curA = curA == null ? headB : curA.next;
+        curB = curB == null ? headA : curB.next;
+    }
+    return curA;
+};
