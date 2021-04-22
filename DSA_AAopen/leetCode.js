@@ -623,3 +623,11 @@ var sumOddLengthSubarrays = function(arr) {
     })
     return sum
 };
+
+
+//number of matches
+
+var numberOfMatches = function (n) {
+    if (n === 1) return 0;
+    return (n % 2) ? (n - 1) / 2 + numberOfMatches((n - 1) / 2 + 1) : (n / 2) + numberOfMatches(n / 2)
+};
