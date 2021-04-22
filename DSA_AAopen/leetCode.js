@@ -599,3 +599,27 @@ var mySqrt = function(x) {
     return Math.floor(x**0.5)
     return Math.floor(Math.sqrt(x))
 };
+
+
+//Given an array of positive integers arr, calculate the sum of all possible odd-length subarrays.
+// A subarray is a contiguous subsequence of the array.
+// Return the sum of all odd-length subarrays of arr.
+
+ 
+var sumOddLengthSubarrays = function(arr) {
+    if (arr.length === 1) return arr[0];
+    let sum = arr.reduce((acc, num) => acc + num);
+    
+    let final = []
+    for(let i = 0; i < arr.length - 2; i++){
+        for(let j = i + 2; j <= arr.length; j++){
+            let sub = arr.slice(i, j)
+            if (sub.length % 2 !== 0) final.push(sub);
+        }
+    }
+    console.log(final)
+    final.forEach(sub => {
+        sum += sub.reduce((acc, num) => acc + num)
+    })
+    return sum
+};
