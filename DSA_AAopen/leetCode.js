@@ -653,3 +653,43 @@ var getIntersectionNode = function(headA, headB) {
     }
     return curA;
 };
+
+
+//add two numbers linkedList
+
+var addTwoNumbers = function (l1, l2) {
+
+    let str1 = []
+    let str2 = []
+
+    let cur1 = l1
+    let cur2 = l2
+    while (cur1 || cur2) {
+        if (cur1) {
+            str1.push(cur1.val)
+            cur1 = cur1.next
+        }
+        if (cur2) {
+            str2.push(cur2.val)
+            cur2 = cur2.next
+        }
+    }
+
+    let sum = (parseInt(str1.reverse().join('')) + parseInt(str2.reverse().join(''))).toString().split('').reverse()
+
+    console.log(sum)
+
+    let newNode = new ListNode(sum.shift());
+
+    let node = newNode; // N(7) -> N(0) -> null
+
+    while (sum.length) {
+        let n = sum.shift()
+        let temp = new ListNode(n)
+        node.next = temp
+        node = temp
+    }
+
+    return newNode
+
+};
