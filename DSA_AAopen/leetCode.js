@@ -712,3 +712,28 @@ var deleteDuplicates = function(head) {
     
     return head
 };
+
+
+
+//inmplement toToLowerCase
+
+// 3. by hand (with str.slice()):
+ var toLowerCase = function(str) {
+     for(let i = 0; i < str.length; i++){
+         let char_code = str[i].charCodeAt(0);
+         if((char_code <= 90) && (char_code >= 65)){
+             if(i === 0){
+                 str = String.fromCharCode(char_code + 32) + str.slice(1, str.length);    
+             }
+             else{
+                 str = str.slice(0, i) + String.fromCharCode(char_code + 32) + str.slice(i+1);
+             }
+         }
+     }
+     return str;
+ }; 
+
+// 4.  the fastest - use array functions:
+var toLowerCase = function(str) {
+    return str.split('').map((elem) => (elem <= 'Z') && (elem >= 'A') ? String.fromCharCode(elem.charCodeAt(0) + 32) : elem).join('');
+}; 
