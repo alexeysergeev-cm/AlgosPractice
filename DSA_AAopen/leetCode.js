@@ -737,3 +737,26 @@ var deleteDuplicates = function(head) {
 var toLowerCase = function(str) {
     return str.split('').map((elem) => (elem <= 'Z') && (elem >= 'A') ? String.fromCharCode(elem.charCodeAt(0) + 32) : elem).join('');
 }; 
+
+
+
+//good triplets
+
+var countGoodTriplets = function (arr, a, b, c) {
+    let res = 0;
+    let hash = { ...arr }
+
+    for (let i = 0; i < arr.length - 2; i++) {
+        for (let j = i + 1; j < arr.length - 1; j++) {
+            for (const k in hash) {
+                if (k > j) {
+                    if (Math.abs(arr[i] - arr[j]) <= a && Math.abs(arr[j] - hash[k]) <= b && Math.abs(arr[i] - hash[k]) <= c) {
+                        res++
+                    }
+                }
+            }
+        }
+    }
+
+    return res;
+};
