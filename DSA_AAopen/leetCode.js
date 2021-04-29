@@ -833,3 +833,21 @@ var minTimeToVisitAllPoints = function(points) {
     
     return res;
 };
+
+
+// Remove Outermost Parentheses
+
+var removeOuterParentheses = function(S) {
+    
+  let result = '';
+  for (let [begin, end, depth] = [0, 1, 1]; end < S.length; end++) {
+    if (S[end] === '(') depth++;
+    else if (S[end] === ')') depth--;
+    if (0 === depth) {
+      result += S.slice(begin + 1, end);
+      begin = end + 1;
+    }
+  }
+  return result;
+    
+};
