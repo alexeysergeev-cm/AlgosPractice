@@ -815,3 +815,21 @@ var largestAltitude = function (gain) {
         return acc
     }, [0]))
 };
+
+
+///min time to visit all points
+
+var minTimeToVisitAllPoints = function(points) {
+    
+    let res = 0; 
+    points.forEach((point, i) => {
+        let arr = []; 
+        if (points[i + 1] !== undefined) {
+            arr.push(Math.abs(point[0] - points[i + 1][0]))
+            arr.push(Math.abs(point[1] - points[i + 1][1]))
+            res += Math.max(...arr)
+        }
+    })
+    
+    return res;
+};
