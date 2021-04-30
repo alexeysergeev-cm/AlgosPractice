@@ -851,3 +851,25 @@ var removeOuterParentheses = function(S) {
   return result;
     
 };
+
+
+
+// MOrse
+var uniqueMorseRepresentations = function (words) {
+    const morse = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."]
+    let alpha = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
+    let res = [];
+    words.forEach(word => {
+        let newW = ""
+        word.split('').forEach(letter => {
+            let idx = alpha.indexOf(letter)
+            newW += morse[idx]
+        })
+        if (!res.includes(newW)) res.push(newW)
+    })
+
+
+    return res.length
+
+};
