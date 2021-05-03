@@ -21,3 +21,26 @@ var reverseStr = function(s, k) {
     
     return arr.map(flipEveryEvenChunk).join("")
 };
+
+
+
+//sub sum 
+//[-1, 2, 5] => 7
+//[5, 3, -7, 6] => 8
+
+const subSum = (arr) => {
+    let currentSum = 0;
+    let max = arr[0] || 0
+
+    for(let i = 0; i < arr.length; i++) {
+        currentSum += arr[i];
+        if (max < currentSum) max = currentSum;
+        if (currentSum < 0) currentSum = 0
+    }
+
+    return max
+}
+
+console.log(subSum([-1, 2, 5]))
+console.log(subSum([5, 3, -7, 6]))
+console.log(subSum([-9, -3, -7, -5]))
