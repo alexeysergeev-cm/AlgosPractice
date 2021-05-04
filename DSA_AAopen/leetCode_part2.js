@@ -112,3 +112,17 @@ var destCity = function(paths) {
     return f;  
     
 };
+
+
+///max 69 number
+
+var maximum69Number  = function(num) {
+
+    let numStr = num.toString();
+    for (let i = 0; i < numStr.length; i++){
+        if (numStr[i] !== '9') return parseInt(numStr.slice(0, i) + '9' + numStr.slice(i + 1))
+    }
+    
+    return parseInt(numStr)
+    
+};
