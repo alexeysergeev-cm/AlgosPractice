@@ -44,3 +44,11 @@ const subSum = (arr) => {
 console.log(subSum([-1, 2, 5]))
 console.log(subSum([5, 3, -7, 6]))
 console.log(subSum([-9, -3, -7, -5]))
+
+
+
+//truncate
+
+var truncateSentence = function(s, k) {
+    return s.split(' ').slice(0, k).join(' ')
+};
