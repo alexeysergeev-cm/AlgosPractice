@@ -52,3 +52,40 @@ console.log(subSum([-9, -3, -7, -5]))
 var truncateSentence = function(s, k) {
     return s.split(' ').slice(0, k).join(' ')
 };
+
+
+
+//longest palindrome
+
+var longestPalindrome = function(s) {
+  
+    let palin = ""
+    
+    for(let i = 0; i < s.length; i++){
+        let j = s.length
+        
+        while (j >= i) {
+            let w = s.slice(i, j)
+            if (isPalin(w)) {
+                if (palin.length < w.length) {
+                    palin = w
+                }
+            }
+            j--
+        }
+    }
+
+    return palin;
+};
+    
+    
+function isPalin(s){
+    
+    let j = s.length - 1
+    for(let i = 0; i < s.length; i++){
+        if (s[i] !== s[j]) return false;
+        j--
+    }
+    
+    return true
+}
