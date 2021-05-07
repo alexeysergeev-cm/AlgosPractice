@@ -69,3 +69,25 @@ var validIPAddress = function(IP) {
         return 'Neither'
     }
 };
+
+
+/// selfDividing nums
+
+var selfDividingNumbers = function(left, right) {
+    let final = [];
+    
+    let cur = left
+    let flag = true
+    while (cur <= right) {
+        const num = cur.toString()
+        if (num.length > 1) {
+            num.split('').forEach(ele => {if (cur % parseInt(ele) !== 0) flag = false})
+            flag ? final.push(cur) : flag = true
+        } else {
+            final.push(cur)
+        }
+        cur++
+    }
+    
+    return final;
+};
