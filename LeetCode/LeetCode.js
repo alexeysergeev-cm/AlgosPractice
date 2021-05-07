@@ -108,3 +108,24 @@ var checkPerfectNumber = function(num) {
     
     return final.reduce((a,b) => a+b) === num
 };
+
+
+//count negative numbers in Matrix
+
+var countNegatives = function(grid) {
+    
+    let count = 0;
+    const len = grid.length
+    const lenInner = grid[0].length
+    for(let i = 0; i < len; i++){
+        for(let j = 0; j < lenInner; j++){
+            if (grid[i][j] < 0) {
+                count += (lenInner - j) 
+                break;
+            }
+            console.log(grid[i][j])
+        }
+    }
+    
+    return count;
+};
