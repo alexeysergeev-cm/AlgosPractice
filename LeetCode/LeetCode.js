@@ -91,3 +91,20 @@ var selfDividingNumbers = function(left, right) {
     
     return final;
 };
+
+
+///pefrect num
+
+var checkPerfectNumber = function(num) {
+    if (num === 1) return false
+    let final = []
+    
+    let half = num / 2
+    let i = 1
+    while (i <= half) {
+        if (num % i === 0) final.push(i);
+        i++;
+    }
+    
+    return final.reduce((a,b) => a+b) === num
+};
