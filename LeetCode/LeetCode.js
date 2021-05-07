@@ -34,17 +34,38 @@ var halvesAreAlike = function(s) {
 
 var validIPAddress = function(IP) {
     let myIp = IP.includes('.') ? '4' : IP.includes(':') ? '6' : 'Neither';
-
+    let ipAlpha = ['0','1','2','3', '4', '5','6','7','8','9','0', 'a','b','c','d','e','f']
     let final = ''
     if (myIp === '4'){
-        IP.split('.').forEach(ele => {
+        
+        let arr = IP.split('.');
+        if (arr.length !== 4) return 'Neither';
+        
+        arr.forEach(ele => {
             if (ele.length > 1 && ele[0] === '0') final = 'Neither';
-        })
+            ele.split('').forEach(ele => { if (isNaN(ele)) final = 'Neither'})
+            console.log(final)
+        });
         if (final === 'Neither') return final;
         
-        let res = IP.split('.').every(ele => (ele >= 0 && ele <= 255))
-        if (res) final = 'IPv4'
+        let res = arr.every(ele => (parseInt(ele) >= 0 && parseInt(ele) <= 255));
+
+        return res ? 'IPv4' : 'Neither';
+        
+    } else if (myIp === '6'){
+        
+        let arr = IP.split(':')
+        if (arr.length !== 8) return 'Neither';
+        arr.forEach(ele => {
+            if (ele.length > 4 || ele.length < 1) final = 'Neither';
+            ele.split('').forEach(ele => {
+                if (!ipAlpha.includes(ele.toLowerCase())) final = 'Neither';
+            })            
+        });
+            if (final === 'Neither') return final;
+            return 'IPv6'
+        
+    } else {
+        return 'Neither'
     }
-    
-    return final
 };
