@@ -140,5 +140,26 @@ FROM
     World
 WHERE 
     area > 3000000 OR population > 25000000 
-    
+
 ```
+
+///decrypt string 
+
+var freqAlphabets = function(s) {
+     let alpha = "abcdefghijklmnopqrstuvwxyz".split('')
+
+     let str = ""
+     for(let i = 0; i < s.length; i++){
+        let idx;
+        if (s[i + 2] === '#'){
+            idx = parseInt(s.slice(i, i + 2))
+            i += 2
+        } else {
+             idx = parseInt(s[i]);
+        }
+             str += alpha[idx - 1];
+     }
+         
+    
+    return str;
+};
