@@ -174,3 +174,23 @@ var maxProduct = function(nums) {
     return (arr[arr.length - 1] - 1) * (arr[arr.length - 2] - 1)
     
 };
+
+//find pivot index
+
+var pivotIndex = function(nums) {
+    //iterate thru arr
+    // note: consider left && right edge == 0 
+    //at each index check left sum === right sum of the index...
+    // if yes -> return index 
+    //if no -> continue seraching
+    
+    for(let i = 0; i < nums.length; i++){
+        let sum1 = nums.slice(0, i).reduce((a,b) => a+b, 0); 
+        let sum2 = nums.slice(i + 1).reduce((a,b) => a+b, 0);
+        if (sum1 === sum2) return i;
+    }
+    
+    return -1
+    
+    //return -1 if not found
+};
