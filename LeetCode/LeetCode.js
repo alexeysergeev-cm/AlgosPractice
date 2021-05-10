@@ -234,3 +234,21 @@ var sumZero = function(n) {
     }
     return newArr
 };
+
+///slowest Key
+
+var slowestKey = function(releaseTimes, keysPressed) {
+    //iterate trhu times;
+    
+    let maxSec = releaseTimes[0];
+    let curL = keysPressed[0];
+    
+    for(let i = 1; i < releaseTimes.length; i++){
+        let flag = false;
+        let curSec = releaseTimes[i] - releaseTimes[i - 1] 
+        curSec > maxSec ? [maxSec = curSec, curL = keysPressed[i]] : flag = false
+        maxSec === curSec ? curL < keysPressed[i] ? curL = keysPressed[i] : flag = false : flag = false;
+    }
+    
+    return curL
+};
