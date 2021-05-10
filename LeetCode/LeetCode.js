@@ -214,3 +214,23 @@ var mergeTrees = function(root1, root2) {
     root1.right = mergeTrees(root1.right, root2.right)
     return root1
 };
+
+
+//find N unique ints 
+
+var sumZero = function(n) {
+    const pivot = -(Math.floor(n/2));
+    
+    let newArr = [pivot];
+    let cur = pivot;
+    
+    while (newArr.length < n) {
+        if (n % 2) {
+            newArr.push(++cur);
+        } else {
+            cur++
+            if (cur !== 0) newArr.push(cur);
+        }
+    }
+    return newArr
+};
