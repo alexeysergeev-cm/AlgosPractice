@@ -163,3 +163,14 @@ var freqAlphabets = function(s) {
     
     return str;
 };
+
+
+
+//max num product in th earr
+
+var maxProduct = function(nums) {
+    
+    const arr = nums.sort((a,b) => a-b);
+    return (arr[arr.length - 1] - 1) * (arr[arr.length - 2] - 1)
+    
+};
