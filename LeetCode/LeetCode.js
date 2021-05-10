@@ -194,3 +194,23 @@ var pivotIndex = function(nums) {
     
     //return -1 if not found
 };
+
+
+///merge trees
+
+var mergeTrees = function(root1, root2) {
+    //create a new rootNode to return
+    
+    //perform DFS for both trees
+    //once at the bottom check if nodes overlapping, if yes -> combine vals
+    //if not -> create a new node with that val
+    //if both trees have no node at that level -> create null node 
+        
+    if(root1 === null) return root2
+    if(root2 === null) return root1
+    
+    root1.val += root2.val;
+    root1.left = mergeTrees(root1.left, root2.left);
+    root1.right = mergeTrees(root1.right, root2.right)
+    return root1
+};
