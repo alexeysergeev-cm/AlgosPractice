@@ -6,7 +6,7 @@ let t1 = new Date()
 addUpto(1000000000000)
 let t2 = new Date()
 
-console.log(`Time elapsed: ${(t2 - t1) / 1000 } seconds.`)
+// console.log(`Time elapsed: ${(t2 - t1) / 1000 } seconds.`)
 
 
 
@@ -163,3 +163,31 @@ function minSubArrayLen(nums, sum) {
  
   return minLen === Infinity ? 0 : minLen;
 }
+
+
+//find longest substring in O(n)
+
+//'helloworld' => 5
+// i
+
+function findLongestSubstring(str){
+
+  let longest = 0;
+  let seen = {};
+  let start = 0;
+ 
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (seen[char]) {
+      start = Math.max(start, seen[char]);
+    }
+    // index - beginning of substring + 1 (to include current in count)
+    longest = Math.max(longest, i - start + 1);
+    // store the index of the next char so as to not double count
+    seen[char] = i + 1;
+    console.log(seen, longest)
+  }
+  return longest;
+}
+
+console.log(findLongestSubstring('helloworld'))
