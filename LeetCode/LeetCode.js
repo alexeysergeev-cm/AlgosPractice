@@ -366,3 +366,28 @@ function countUniqueValues(arr){
   console.log(arr)
   return i+1;
 }
+
+
+///same frequency
+
+function sameFrequency(n1,n2){
+  // good luck. Add any arguments you deem necessary.
+  const num1 = n1.toString();
+  const num2 = n2.toString();
+  if (num1.length !== num2.length) return false;
+  const obj = {};
+  
+  for(const char of num1){
+      obj[char] ? obj[char]++ : obj[char] = 1;
+  }
+  
+  for(const char of num2){
+      if(!obj[char]) {
+          return false;
+      } else {
+          obj[char]--
+      }
+  }
+  
+  return true
+}
