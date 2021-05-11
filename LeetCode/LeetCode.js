@@ -269,3 +269,30 @@ var sumOfUnique = function(nums) {
     
     return Object.keys(obj).filter(k => obj[k] === 1).reduce((a,b)=>parseInt(a) + parseInt(b), 0);
 };
+
+
+//word pattern
+
+var wordPattern = function(pattern, s) {
+    // create obj to keep track of elements
+    // split the s
+    // create i to monitor index in s 
+    // iterate thru pattern, set the flag to flase
+    // if obj has pattern[i], check obj[char] === arr[i], if not return false, else flag = true;
+    // if obj does not have pattern[i], check if values of obj include arr[i], if yes return false, else assign;
+    // check the length of pattern and s.plit(), if not eq => false
+    // return true
+    
+    let obj = {};
+    let arr = s.split(' ');
+    let i = 0
+    for(const char of pattern) {
+        let flag = true;
+        obj[char] ? obj[char] === arr[i] ? flag = true : flag = false : Object.values(obj).includes(arr[i]) ? flag = false : obj[char] = arr[i]
+        i++
+        if (!flag) return false
+    }
+    
+    if (pattern.length !== arr.length) return false
+    return true
+};
