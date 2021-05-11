@@ -252,3 +252,20 @@ var slowestKey = function(releaseTimes, keysPressed) {
     
     return curL
 };
+
+//sum of Unique
+
+var sumOfUnique = function(nums) {
+    //iterate thru nums 
+    //count appearance of each num and store in obj
+    //extract only keys that = 1;
+    //reduce the arr
+    
+    let obj = {}
+    nums.forEach(ele => {
+        obj[ele] ? obj[ele]++ : obj[ele] = 1 
+    })
+
+    
+    return Object.keys(obj).filter(k => obj[k] === 1).reduce((a,b)=>parseInt(a) + parseInt(b), 0);
+};
