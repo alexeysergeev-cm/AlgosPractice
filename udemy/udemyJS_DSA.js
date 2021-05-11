@@ -111,3 +111,22 @@ function isSubsequence(s1,s2) {
   
   return false;
 }
+
+
+///max subarray
+
+function maxSubarraySum(arr, n){
+  // add whatever parameters you deem necessary - good luck!
+  if (arr.length < n) return null;
+  
+  let max = -Infinity;
+  let tempo = arr.slice(0, n).reduce((a,b)=>a+b)
+  let i = 0;
+  while (i < arr.length - n + 1){
+    let temp = tempo - arr[i] + arr[i + n];
+    max = temp > max ? temp : max;
+    tempo = temp;
+    i++;
+  }
+  return max;
+}
