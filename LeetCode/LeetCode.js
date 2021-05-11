@@ -1,19 +1,19 @@
 
 // SQL update salary
 
-```
-UPDATE salary 
-SET 
-    sex = CASE sex
-        WHEN 'm' THEN 'f'
-        ELSE 'm'
-    END;
-```
+// `
+// UPDATE salary 
+// SET 
+//     sex = CASE sex
+//         WHEN 'm' THEN 'f'
+//         ELSE 'm'
+//     END
+// `
 
-```
-UPDATE salary
-SET sex = IF(sex = 'm', 'f', 'm')
-```
+// `
+// UPDATE salary
+// SET sex = IF(sex = 'm', 'f', 'm')
+// `
 
 
 /// halves alike
@@ -133,15 +133,15 @@ var countNegatives = function(grid) {
 
 ///big country SQL
 
-```
-SELECT 
-    name, population, area
-FROM 
-    World
-WHERE 
-    area > 3000000 OR population > 25000000 
+// `
+// SELECT 
+//     name, population, area
+// FROM 
+//     World
+// WHERE 
+//     area > 3000000 OR population > 25000000 
 
-```
+// `
 
 ///decrypt string 
 
@@ -297,4 +297,30 @@ var wordPattern = function(pattern, s) {
     return true
 };
 
-//
+//the same arr1[i] === arr2[i]^2 arrays
+
+function sameArr(arr1, arr2) {
+    //store all the values from arr2 as keys in obj
+    //iterate tru arr1 and square it to see if it has key in obj
+    //keep track of how many keys in arr2;
+    
+    if(arr1.length !== arr2.length) return false;
+
+    let obj = {};
+    arr2.forEach(ele => {
+        obj[ele] ? obj[ele]++ : obj[ele] = 1;
+    })
+
+    for(const ele of arr1){
+        let squaredEle = ele*ele
+        if (!obj[squaredEle]) return false;
+        obj[squaredEle]--;
+        if (obj[squaredEle] === 0) delete obj[squaredEle];
+    }
+
+    return true
+}
+
+console.log(sameArr([1,2,3], [1,4,9]))
+console.log(sameArr([1,2,3], [1,4,4]))
+console.log(sameArr([1,2,3,2], [1,9,4,4]))
