@@ -67,3 +67,25 @@ function areThereDuplicates(...args) {
 function areThereDuplicates() {
   return new Set(arguments).size !== arguments.length;
 }
+
+
+///avg pair
+
+
+function averagePair(arr, target){
+  // add whatever parameters you deem necessary - good luck!
+  if (!arr.length || target === null) return false;
+  let i = 0;
+  let j = arr.length - 1;
+  while (i < j){
+      if ((arr[i] + arr[j]) / 2 === target) {
+          return true;
+      } else if ((arr[i] + arr[j]) / 2 > target) {
+          j--
+      } else {
+          i++
+      }
+  }
+  
+  return false;
+}
