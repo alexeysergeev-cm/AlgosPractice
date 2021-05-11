@@ -321,9 +321,9 @@ function sameArr(arr1, arr2) {
     return true
 }
 
-console.log(sameArr([1,2,3], [1,4,9]))
-console.log(sameArr([1,2,3], [1,4,4]))
-console.log(sameArr([1,2,3,2], [1,9,4,4]))
+// console.log(sameArr([1,2,3], [1,4,9]))
+// console.log(sameArr([1,2,3], [1,4,4]))
+// console.log(sameArr([1,2,3,2], [1,9,4,4]))
 
 
 ///anagrams 
@@ -338,8 +338,31 @@ function validAnagram(str1, str2){
   }
   
   for(const char of str2){
-      obj[char] ? obj[char]-- : obj[char] = 1;
+      if (obj[char]) {
+          obj[char]--;
+      } else {
+          return false;
+      }
   }
   
-  return Object.values(obj).every(val => val === 0);
+//   return Object.values(obj).every(val => val === 0);
+  return true
+}
+
+//obj = {'m':0} => obj[m] ? => falsy
+console.log(validAnagram('hello', 'ollah'))
+
+
+// count unique Values - multiple pointers
+
+function countUniqueValues(arr){
+  // add whatever parameters you deem necessary - good luck!
+  if (!arr.length) return 0;
+  let i = 0;
+  let j = i + 1;
+  while(j < arr.length){
+    (arr[i] !== arr[j]) ? [i++, arr[i] = arr[j], j++] : j++    
+  }
+  console.log(arr)
+  return i+1;
 }
