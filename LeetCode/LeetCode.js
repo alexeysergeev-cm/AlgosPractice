@@ -324,3 +324,22 @@ function sameArr(arr1, arr2) {
 console.log(sameArr([1,2,3], [1,4,9]))
 console.log(sameArr([1,2,3], [1,4,4]))
 console.log(sameArr([1,2,3,2], [1,9,4,4]))
+
+
+///anagrams 
+
+function validAnagram(str1, str2){
+  // add whatever parameters you deem necessary - good luck!
+  if (str1.length !== str2.length) return false;
+  let obj = {};
+  
+  for(const char of str1) {
+      obj[char] ? obj[char]++ : obj[char] = 1;
+  }
+  
+  for(const char of str2){
+      obj[char] ? obj[char]-- : obj[char] = 1;
+  }
+  
+  return Object.values(obj).every(val => val === 0);
+}
