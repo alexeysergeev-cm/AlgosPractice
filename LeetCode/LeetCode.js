@@ -391,3 +391,15 @@ function sameFrequency(n1,n2){
   
   return true
 }
+
+
+///are there duplicates
+
+function areThereDuplicates() {
+  // good luck. (supply any arguments you deem necessary.)
+  let arr = Array.from(arguments);
+  const obj = {};
+  
+  arr.forEach(ele => obj[ele] ? obj[ele]++ : obj[ele] = 1);
+  return Object.values(obj).some(ele => ele > 1)
+}
