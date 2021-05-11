@@ -296,3 +296,5 @@ var wordPattern = function(pattern, s) {
     if (pattern.length !== arr.length) return false
     return true
 };
+
+//
