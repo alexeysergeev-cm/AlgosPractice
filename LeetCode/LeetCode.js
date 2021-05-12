@@ -460,3 +460,34 @@ var findNumbers = function (nums) {
 
 
 };
+
+
+//multiple pointers technique
+
+var summaryRanges = function(nums) {
+    const res = [];
+    
+    let start = 0;
+    let i = 0;
+    let j = 1;
+    
+    
+    while (i < nums.length){
+        if (nums[j] - nums[i] === 1){
+            i++;
+            j++;
+        } else {
+            if (nums[start] !== nums[i]){
+                res.push(`${nums[start]}->${nums[i]}`)
+            } else {
+                res.push(`${nums[start]}`);
+            }
+            start = j;
+            i = j;
+            j++;
+        }
+    }
+    
+    return res
+    
+};
