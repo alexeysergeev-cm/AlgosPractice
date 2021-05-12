@@ -403,3 +403,42 @@ function areThereDuplicates() {
   arr.forEach(ele => obj[ele] ? obj[ele]++ : obj[ele] = 1);
   return Object.values(obj).some(ele => ele > 1)
 }
+
+
+// areThereDuplicates Solution (Multiple Pointers)
+function areThereDuplicates(...args) {
+  // Two pointers
+  args.sort((a,b) => a > b);
+  let start = 0;
+  let next = 1;
+  while(next < args.length){
+    if(args[start] === args[next]){
+        return true
+    }
+    start++
+    next++
+  }
+  return false
+}
+// areThereDuplicates One Liner Solution
+function areThereDuplicates() {
+  return new Set(arguments).size !== arguments.length;
+}
+
+
+/// min Operations
+
+var minOperations = function (nums) {
+    if (nums.length === 1) return 0;
+
+    let count = 0;
+    nums.forEach((n, i) => {
+        if (n >= nums[i + 1]) {
+            let temp = (n - nums[i + 1]) + 1
+            count += temp
+            nums[i + 1] = temp + nums[i + 1]
+        }
+    })
+    console.log(nums)
+    return count;
+};
