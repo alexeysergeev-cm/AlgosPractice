@@ -442,3 +442,21 @@ var minOperations = function (nums) {
     console.log(nums)
     return count;
 };
+
+
+
+///find even
+
+var findNumbers = function (nums) {
+    return nums.reduce((a, b) => { if (!(b.toString().length % 2)) a++; return a }, 0)
+
+
+    // return nums.reduce((even, num) => {
+    //     if (!(num.toString().length % 2)) {
+    //         even++
+    //     } 
+    //     return even
+    // }, 0)
+
+
+};
