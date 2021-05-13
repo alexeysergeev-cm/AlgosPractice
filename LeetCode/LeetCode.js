@@ -489,5 +489,19 @@ var summaryRanges = function(nums) {
     }
     
     return res
-    
 };
+
+
+//nested Obj sum
+
+function nestedEvenSum (obj, sum=0) {
+  // add whatever parameters you deem necessary - good luck!
+    for(let key in obj){
+        if (typeof obj[key] === 'object'){
+            sum += nestedEvenSum(obj[key]);
+        } else if (typeof obj[key] === 'number' && obj[key] % 2 === 0){
+            sum += obj[key];
+        }
+    }
+    return sum
+}
