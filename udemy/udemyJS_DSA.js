@@ -190,7 +190,7 @@ function findLongestSubstring(str){
   return longest;
 }
 
-console.log(findLongestSubstring('helloworld'))
+// console.log(findLongestSubstring('helloworld'))
 
 
 //binary search
@@ -210,3 +210,26 @@ function binarySearch(arr, t) {
     return mid;
   }
 }
+
+
+///naive search find patterns in a sentence
+
+let str = 'hello my name is bob fisher';
+let patt = 'is';
+function naivePatternSearch(s, p) {
+  let counter = 0;
+  let start = 0;
+  let end = p.length;
+  while(start < s.length - p.length + 1){
+    if (p === s.slice(start, end)) counter++;
+    start++;
+    end++;    
+  }
+
+  return counter;
+}
+
+// console.log(naivePatternSearch(str, patt))
+// console.log(naivePatternSearch(str, 'er'))
+// console.log(naivePatternSearch(str, 'bob'))
+// console.log(naivePatternSearch(str, 'isher'))
