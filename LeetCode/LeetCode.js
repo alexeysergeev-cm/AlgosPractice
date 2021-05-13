@@ -505,3 +505,35 @@ function nestedEvenSum (obj, sum=0) {
     }
     return sum
 }
+
+
+//stringify nums 
+
+function stringifyNumbers(obj){
+    const newObj = {};
+      for (var key in obj) {
+        if (typeof obj[key] === 'number') {
+          newObj[key] = obj[key].toString();
+        } else if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+          newObj[key] = stringifyNumbers(obj[key]);
+        } else {
+          newObj[key] = obj[key];
+        }
+      }
+      return newObj;  
+}
+
+//collect string in object
+
+function collectStrings(obj){
+    let newArr = [];
+    
+    for (let key in obj) {
+        if (typeof obj[key] === 'string') newArr.push(obj[key]);
+        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])){
+            newArr = newArr.concat(collectStrings(obj[key]));
+        }
+    }
+    
+    return newArr;
+}
