@@ -191,3 +191,22 @@ function findLongestSubstring(str){
 }
 
 console.log(findLongestSubstring('helloworld'))
+
+
+//binary search
+
+function binarySearch(arr, t) {
+  // add whatever parameters you deem necessary - good luck!
+  if (!arr.length) return -1;
+
+  const mid = Math.floor(arr.length / 2);
+
+  if (t < arr[mid]) {
+    return binarySearch(arr.slice(0, mid), t);
+  } else if (t > arr[mid]) {
+    const res = binarySearch(arr.slice(mid + 1), t);
+    return res !== -1 ? (res + mid + 1) : -1;
+  } else {
+    return mid;
+  }
+}
