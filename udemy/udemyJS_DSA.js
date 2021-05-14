@@ -297,11 +297,12 @@ function selectionSort(arr){
     let min = i;
     for(let j = i + 1; j < arr.length; j++){
       if (arr[min] > arr[j]) min = j;
-      if (j === arr.length - 1) [arr[i], arr[min]] = [arr[min], arr[i]];
     }
+    [arr[i], arr[min]] = [arr[min], arr[i]];
   }
 
   return arr
 }
 
 console.log(selectionSort([2,3,1,-1,5,10,23,13,-3]));
+console.log(selectionSort([]));
