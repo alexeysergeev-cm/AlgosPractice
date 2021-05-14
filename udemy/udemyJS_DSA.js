@@ -252,3 +252,14 @@ function bubleSort(arr){
 }
 
 console.log(bubleSort([1,2,41,51,25,6,73,8,89,90,-2,3,-6]))
+
+
+//flipping image
+
+var flipAndInvertImage = function(image) {
+    return image.reduce((res, arr) => {
+        let newA = arr.reverse().map(ele => ele === 0 ? 1 : 0);
+        res.push(newA);
+        return res;
+    }, [])
+};
