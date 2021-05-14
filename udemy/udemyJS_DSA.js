@@ -263,3 +263,28 @@ var flipAndInvertImage = function(image) {
         return res;
     }, [])
 };
+
+
+///longest continious sequence
+
+var findLengthOfLCIS = function(nums) {
+    let start = 0;
+    let end = 1;
+    let res = 0;
+    
+    let temp = 1;
+    while(start < nums.length){
+        if(nums[end] > nums[start]){
+            temp++;
+        } else {
+            res = res < temp ? temp : res;
+            temp = 1;
+        }
+        
+        start++;
+        end++;
+        
+    }
+    
+    return res;
+};
