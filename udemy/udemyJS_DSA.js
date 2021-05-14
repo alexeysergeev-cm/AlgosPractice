@@ -298,11 +298,31 @@ function selectionSort(arr){
     for(let j = i + 1; j < arr.length; j++){
       if (arr[min] > arr[j]) min = j;
     }
-    [arr[i], arr[min]] = [arr[min], arr[i]];
+    if (i !== min) [arr[i], arr[min]] = [arr[min], arr[i]];
   }
 
   return arr
 }
 
-console.log(selectionSort([2,3,1,-1,5,10,23,13,-3]));
-console.log(selectionSort([]));
+// console.log(selectionSort([2,3,1,-1,5,10,23,13,-3]));
+// console.log(selectionSort([]));
+
+//insertion Sort
+
+function insertionSort(arr){
+
+  for(let i = 1; i < arr.length; i++){
+    let cur = arr[i];
+    let idx;
+    for(let j = i - 1; j >= 0 && arr[j] > cur; j--){
+      idx = j
+      arr[j+1] = arr[j];
+    }
+    arr[idx] = cur;
+  }
+  return arr;
+}
+
+//                            i
+console.log(insertionSort([4, 3, 1, 2]))
+//                              j
