@@ -313,7 +313,7 @@ function insertionSort(arr){
 
   for(let i = 1; i < arr.length; i++){
     let cur = arr[i];
-    let idx;
+    let idx; //1
     for(let j = i - 1; j >= 0 && arr[j] > cur; j--){
       idx = j
       arr[j+1] = arr[j];
@@ -323,6 +323,48 @@ function insertionSort(arr){
   return arr;
 }
 
-//                            i
-console.log(insertionSort([4, 3, 1, 2]))
-//                              j
+//                                  i
+// console.log(insertionSort([4, 3, 1, 2]))
+//                            j
+///                        1, 2, 3, 4
+
+
+
+function productify(arr){
+	let newArr = []; //24
+
+  for(let i = 0; i < arr.length; i++) {
+		let tempArr = arr.splice(i, 1);     ///remove it
+		newArr.push(tempArr.reduce((a,b) => a*b))
+	}
+
+  return (newArr.length) ? newArr : null; 
+}
+
+// console.log(productify([1,2,3]))
+
+
+
+function mergeSort(arr){
+  if(arr.length <= 1) return arr;
+
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+
+  return merge(left, right);
+}
+
+function merge(arr1, arr2){
+  const sorted = [];
+  while(arr1.length && arr2.length){
+    if(arr1[0] < arr2[0]){
+      sorted.push(arr1.shift());
+    } else {
+      sorted.push(arr2.shift());
+    }
+  }
+  return sorted.concat(arr1, arr2);
+}
+
+console.log(mergeSort([4,2,1,5,6,3]))
