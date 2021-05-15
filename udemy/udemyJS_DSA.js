@@ -367,4 +367,15 @@ function merge(arr1, arr2){
   return sorted.concat(arr1, arr2);
 }
 
+// console.log(mergeSort([4,2,1,5,6,3]))
+function quickSort(arr){
+  if (arr.length <= 1) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = quickSort(arr.slice(0, mid).filter(ele => ele <= arr[mid]));
+  const right = quickSort(arr.slice(mid+1).filter(ele => ele > arr[mid]));
+  return left.concat(arr[mid], right);
+}
+
+
 console.log(mergeSort([4,2,1,5,6,3]))
+console.log(mergeSort([4,2,1,5,6,55,123,51,661,2,3,61,-2,-12,3,19]))
