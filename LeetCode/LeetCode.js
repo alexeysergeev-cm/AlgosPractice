@@ -537,3 +537,21 @@ function collectStrings(obj){
     
     return newArr;
 }
+
+
+/// max population in year range;
+
+var maximumPopulation = function(logs) {
+    
+    let res = {};
+    
+    for(let i = 0; i < logs.length; i++)
+        if(!res[logs[i][0]])
+            for(let j = 0; j < logs.length; j++)
+                if(logs[i][0] >= logs[j][0] && logs[i][0] < logs[j][1])
+                    res[logs[i][0]] = (res[logs[i][0]] ? res[logs[i][0]] : 0) + 1;
+    
+    return Object.keys(res).sort((a,b) => res[b] - res[a])[0]
+    
+    
+};
