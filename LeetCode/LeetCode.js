@@ -555,3 +555,12 @@ var maximumPopulation = function(logs) {
     
     
 };
+
+
+//search insert -> need to solve in O(log n);
+
+var searchInsert = function(nums, target, l = nums.length) {
+    let i = 0;
+    while(nums[i] < target) i++;
+    return i;
+};
