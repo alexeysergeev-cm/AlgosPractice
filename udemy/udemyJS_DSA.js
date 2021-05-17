@@ -379,10 +379,55 @@ function quickSort(arr){
 }
 
 
-console.log(quickSort([4,2,1,5,6,3]))
-console.log(mergeSort([4,2,1,5,6,55,123,51,661,2,3,61,-2,-12,3,19]))
+// console.log(quickSort([4,2,1,5,6,3]))
+// console.log(quickSort([4,2,1,5,6,55,123,51,661,2,3,61,-2,-12,3,19]))
 
 
+///radix SORT
+
+function getDigit(num, place){
+  // if (num.toString().length <= place) return 0;
+
+  // let n = num.toString().split('').reverse();
+  // return parseInt(n[place]);
+
+  //or 
+  return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+
+}
+
+function digitCount(num){
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+function mostDigits(arr){
+  let maxDigits = 0;
+  for(let i = 0; i < arr.length; i++){
+    maxDigits = Math.max(maxDigits, digitCount(arr[i]));
+  }
+  return maxDigits
+}
+
+function radixSort(arr){
+  let times = mostDigits(arr);
+  let i = 0;
+
+  while(i < times){
+    const newArr = Array.from({length: 10}, () => []);
+    for(let j = 0; j < arr.length; j++){
+      newArr[getDigit(arr[j], i)].push(arr[j])
+    }
+    arr = [].concat(...newArr);
+    i++;
+  }
+  return arr;
+}
+
+console.log(getDigit(12, 1))
+console.log(digitCount(1234))
+console.log(mostDigits([1, 23, 34,567, 7892, 391823]))
+console.log(radixSort([1, 23, 34,567, 7892, 391823, 1823, 1,5, 81,91, 23,4]))
 
 
 
