@@ -431,3 +431,24 @@ console.log(radixSort([1, 23, 34,567, 7892, 391823, 1823, 1,5, 81,91, 23,4]))
 
 
 
+function longestPal(str){
+  let longest = "";
+
+  for(let i = 0; i < str.length; i++){
+    let j = i;
+    let k = i;
+
+    while(k !== undefined || j !== undefined){
+      if(str[k] === str[j]){
+        longest = longest.length < str.slice(k, j+1).length ? str.slice(k, j+1) : longest;   
+        k--;
+        j++;
+      } else {
+        break;
+      }
+    }
+  }
+  return longest;
+}
+
+console.log(longestPal('babcbabcbaccba'))
