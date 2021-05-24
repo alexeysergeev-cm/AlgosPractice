@@ -700,3 +700,14 @@ var finalPrices = function(prices) {
         return acc;
     }, [])
 };
+
+
+//trim mean
+
+var trimMean = function(arr) {
+    let newA = arr.sort((a,b)=>a-b);
+    let numToDelete = newA.length * 0.05;
+    newA = newA.slice(numToDelete, newA.length - numToDelete);
+
+    return (newA.reduce((a,b)=>a+b) / newA.length);
+};
