@@ -616,3 +616,21 @@ var shiftingLetters = function(s, shifts) {
     
     return temp.join('')
 };
+
+
+//middle node
+
+var middleNode = function(head) {
+    
+    let ans = [];
+    
+    let cur = head
+    while(cur.next){
+        ans.push(cur)
+        cur = cur.next
+    }
+    ans.push(cur);
+    
+    let i = Math.floor(ans.length / 2)
+    return ans[i]
+};
