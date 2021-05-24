@@ -645,3 +645,15 @@ var middleNode = function(head) {
     }
     return slow;
 };
+
+
+///sorting the sent
+
+var sortSentence = function(s) {
+    return s.split(' ').reduce((acc,val) => {
+        let newV = val.slice(0, val.length - 1);
+        let idx = val[val.length - 1] - 1;
+        acc[idx] = newV;
+        return acc;
+    }, []).join(' ');
+};
