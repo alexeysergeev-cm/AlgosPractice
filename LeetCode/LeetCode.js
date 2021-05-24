@@ -666,3 +666,17 @@ var busyStudent = function(startTime, endTime, queryTime) {
         return acc
     }, 0)
 };
+
+
+// Sort Array By Parity
+
+var sortArrayByParity = function(nums) {
+    return nums.reduce((acc,val) => {
+        if(val % 2){
+            acc.push(val);
+        } else{
+            acc.unshift(val);
+        }
+        return acc;
+    }, [])
+};
