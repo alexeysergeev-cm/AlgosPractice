@@ -564,3 +564,20 @@ var searchInsert = function(nums, target, l = nums.length) {
     while(nums[i] < target) i++;
     return i;
 };
+
+
+/// Replace All Digits with Characters
+
+var replaceDigits = function(s) {
+    return s.split('').reduce((acc,val,index) => {
+        if (/[0-9]/.test(val)){
+            acc += String.fromCharCode(s.charCodeAt(index-1) + parseInt(val)); 
+        } else {
+            acc += val
+        }
+        return acc
+    })
+}
+
+let s = "a1c1e1"
+console.log(replaceDigits(s))
