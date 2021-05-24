@@ -680,3 +680,23 @@ var sortArrayByParity = function(nums) {
         return acc;
     }, [])
 };
+
+///final prices
+
+var finalPrices = function(prices) {
+    
+    return prices.reduce((acc,val, i) => {
+        
+        const newArr = prices.slice(i + 1);
+        
+        for(let j = 0; j < newArr.length; j++){
+            if (newArr[j] <= val){
+                acc.push(val - newArr[j]);
+                return acc;
+            }
+        }
+        
+        acc.push(val);
+        return acc;
+    }, [])
+};
