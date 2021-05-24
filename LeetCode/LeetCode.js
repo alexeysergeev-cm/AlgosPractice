@@ -581,3 +581,38 @@ var replaceDigits = function(s) {
 
 let s = "a1c1e1"
 console.log(replaceDigits(s))
+
+
+///shifting letter brute force?
+var shiftingLetters = function(s, shifts) {
+    
+    const alpha = 'abcdefghijklmnopqrstuvwxyz'
+    
+    let temp = s.split('');
+    
+    for(let i = 0; i < shifts.length; i++){ 
+        let j = 0;
+        while(j < i+1){
+            temp[j] = alpha[(alpha.indexOf(temp[j]) + shifts[i]) % 26];
+            j++
+        }
+    
+    }
+    
+    return temp.join('')
+};
+
+///v 2
+
+var shiftingLetters = function(s, shifts) {
+    
+    const alpha = 'abcdefghijklmnopqrstuvwxyz'
+    let temp = s.split('');
+    
+    for(let i = 0; i < s.length; i++){
+        let nums = shifts.slice(i).reduce((a,b) => a+b);
+        temp[i] = alpha[(alpha.indexOf(temp[i]) + nums) % 26];
+    }
+    
+    return temp.join('')
+};
