@@ -634,3 +634,14 @@ var middleNode = function(head) {
     let i = Math.floor(ans.length / 2)
     return ans[i]
 };
+
+//slow and fast pointer
+
+var middleNode = function(head) {
+    slow = fast = head;
+    while (fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+};
