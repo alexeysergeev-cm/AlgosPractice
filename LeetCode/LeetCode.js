@@ -657,3 +657,12 @@ var sortSentence = function(s) {
         return acc;
     }, []).join(' ');
 };
+
+
+//num of students doing hw
+var busyStudent = function(startTime, endTime, queryTime) {
+    return startTime.reduce((acc,v,i) => {
+        if (queryTime >= startTime[i] && queryTime <= endTime[i]) acc++;
+        return acc
+    }, 0)
+};
