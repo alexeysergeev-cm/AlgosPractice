@@ -764,3 +764,20 @@ var deleteDuplicates = function(head) {
     
     return head
 };
+
+
+///linkledlist has cycle fast adn slow pointer
+
+var hasCycle = function(head) {
+    
+    let s = head
+    let f = head
+    
+    while(f && f.next){
+        s = s.next;
+        f = f.next.next
+        if(s === f) return true;
+    }
+    return false;
+    
+};
