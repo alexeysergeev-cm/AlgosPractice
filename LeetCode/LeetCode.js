@@ -734,3 +734,15 @@ var replaceElements = function (arr) {
         else return ele = Math.max(...arr.slice(i + 1));
     })
 };
+
+
+///remove ele in place with O(1)
+var removeElement = function(nums, val) {
+    
+    for(let i = nums.length - 1; i >= 0; i--){
+        if(nums[i] === val){
+            nums.splice(i, 1);
+        }
+    }
+    return nums.length
+};
