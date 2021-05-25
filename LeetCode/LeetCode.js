@@ -724,3 +724,13 @@ var canJump = function(nums) {
     }
     
 };
+
+
+///replace elemenets
+
+var replaceElements = function (arr) {
+    return arr.map((ele, i) => {
+        if (i === arr.length - 1) return ele = -1;
+        else return ele = Math.max(...arr.slice(i + 1));
+    })
+};
