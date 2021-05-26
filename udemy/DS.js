@@ -364,12 +364,12 @@ class DoublyLinkedList{
 
 //// -----------> Stack
 
-class Node{
-  constructor(val){
-    this.val = val
-    this.next = null;
-  }
-}
+// class Node{
+//   constructor(val){
+//     this.val = val
+//     this.next = null;
+//   }
+// }
 
 class Stack {
   constructor(){
@@ -440,3 +440,54 @@ class Queue{
     return temp.val;
   }
 }
+
+///------> BST
+
+class Node{
+  constructor(val){
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BST {
+  constructor(){
+    this.root = null;
+  }
+
+  insert(val){
+    const newNode = new Node(val);
+    if (!this.root) this.root = newNode;
+    else {
+      let cur = this.root;
+
+      while(cur){
+        if(val < cur.val){
+          if(cur.left){
+            cur = cur.left;
+          } else{
+            cur.left = newNode;
+            break
+          }
+        } else {
+          if (cur.right){
+            cur = cur.right;
+          }else {
+            cur.right = newNode
+            break
+          }
+        }
+      }
+    }
+
+    return this
+  }
+}
+
+const bst = new BST();
+bst.insert(10)
+bst.insert(13)
+bst.insert(15)
+
+console.log(bst)
