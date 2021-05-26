@@ -484,6 +484,20 @@ class BST {
 
     return this
   }
+
+  find(val, root = this.root){
+    if (!this.root) return null;
+
+    let cur = root;
+    if (cur.val === val) return true;
+    if (val < cur.val){
+      if(cur.left) return this.find(val, root=cur.left)
+      else return false;
+    } else {
+      if(cur.right) return this.find(val, root=cur.right)
+      else return false;
+    }
+  }
 }
 
 const bst = new BST();
@@ -491,5 +505,8 @@ bst.insert(10)
 bst.insert(13)
 bst.insert(15)
 bst.insert(7)
+bst.insert(11)
+bst.insert(2)
+bst.insert(5)
 
-console.log(bst)
+console.log(bst.find(10))
