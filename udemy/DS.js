@@ -461,8 +461,9 @@ class BST {
     if (!this.root) this.root = newNode;
     else {
       let cur = this.root;
-
       while(cur){
+        if(val === cur.val) return undefined;
+
         if(val < cur.val){
           if(cur.left){
             cur = cur.left;
@@ -470,7 +471,7 @@ class BST {
             cur.left = newNode;
             break
           }
-        } else {
+        } else if (val > cur.val) {
           if (cur.right){
             cur = cur.right;
           }else {
@@ -489,5 +490,6 @@ const bst = new BST();
 bst.insert(10)
 bst.insert(13)
 bst.insert(15)
+bst.insert(7)
 
 console.log(bst)
