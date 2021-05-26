@@ -184,13 +184,13 @@ class SinglyLinkedList{
 
 /////////-----> DOUBLY Linked List
 
-class Node{
-  constructor(val){
-    this.val = val
-    this.next = null;
-    this.prev = null;
-  }
-}
+// class Node{
+//   constructor(val){
+//     this.val = val
+//     this.next = null;
+//     this.prev = null;
+//   }
+// }
 
 class DoublyLinkedList{
   constructor(){
@@ -350,13 +350,55 @@ class DoublyLinkedList{
   }
 }
 
-let dlist = new DoublyLinkedList();
-dlist.push(44)
-dlist.push(55)
-dlist.push(66)
-dlist.push(77)
-dlist.push(88)
-dlist.push(99)
+// let dlist = new DoublyLinkedList();
+// dlist.push(44)
+// dlist.push(55)
+// dlist.push(66)
+// dlist.push(77)
+// dlist.push(88)
+// dlist.push(99)
 
-console.log(dlist.remove(4))
-console.log(dlist)
+// console.log(dlist.remove(4))
+// console.log(dlist)
+
+
+class Node{
+  constructor(val){
+    this.val = val
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor(){
+    this.first = null
+    this.last = null
+    this.size = 0;
+  }
+
+  push(val){
+    let newNode = new Node(val);
+    if(!this.fisrt){
+      this.first = newNode
+      this.last = newNode
+    } else {
+      let temp = this.first;
+      this.first = newNode
+      this.first.next = temp;
+    }
+    return ++this.size;
+  }
+
+  pop(){
+    if(!this.size) return null;
+    let temp = this.first;
+
+    if(this.first === this.last){
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--
+    return temp.val;
+  }
+  
+}
