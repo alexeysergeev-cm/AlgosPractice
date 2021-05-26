@@ -486,7 +486,7 @@ class BST {
   }
 
   find(val, root = this.root){
-    if (!this.root) return null;
+    if (!this.root) return false;
 
     let cur = root;
     if (cur.val === val) return true;
@@ -497,6 +497,19 @@ class BST {
       if(cur.right) return this.find(val, root=cur.right)
       else return false;
     }
+  }
+
+  ibfs(){
+    if(!this.root) return undefined;
+    const res = [];
+    const queue = [this.root];
+    while(queue.length){
+      const visited = queue.shift();
+      res.push(visited.val);
+      if(visited.left) queue.push(visited.left);
+      if(visited.right) queue.push(visited.right);
+    }
+    return res;
   }
 }
 
@@ -510,3 +523,4 @@ bst.insert(2)
 bst.insert(5)
 
 console.log(bst.find(10))
+console.log(bst.ibfs())
