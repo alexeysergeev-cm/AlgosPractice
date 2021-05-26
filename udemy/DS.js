@@ -511,6 +511,30 @@ class BST {
     }
     return res;
   }
+
+  dfsPre(){
+    if(!this.root) return undefined;
+    const res = [];
+    const stack = [this.root];
+    while(stack.length){
+      const visited = stack.pop();
+      res.push(visited.val);
+      if(visited.right) stack.push(visited.right);
+      if(visited.left) stack.push(visited.left);
+    }
+    return res;
+  }
+
+  dfsPost(){
+    const res = [];
+    function traverse(node){
+      if(node.left) traverse(node.left);
+      if(node.right) traverse(node.right);
+      res.push(node.val);
+    }
+    traverse(this.root)
+    return res;
+  }
 }
 
 const bst = new BST();
@@ -522,5 +546,7 @@ bst.insert(11)
 bst.insert(2)
 bst.insert(5)
 
-console.log(bst.find(10))
-console.log(bst.ibfs())
+// console.log(bst.find(10))
+// console.log(bst.ibfs())
+// console.log(bst.dfsPre())
+console.log(bst.dfsPost())
