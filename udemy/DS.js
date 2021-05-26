@@ -328,6 +328,26 @@ class DoublyLinkedList{
     this.length--;
     return foundNode;
   }
+  reverse(){
+    if(!this.head) return undefined;
+    
+    let cur = this.head
+    this.head = this.tail
+    this.tail = cur
+    
+    let next;
+    let prev = null;
+    
+    
+    while(cur){
+        next = cur.next;
+        cur.next = prev;
+        cur.prev = next;
+        prev = cur
+        cur = next;
+    }
+    return this;
+  }
 }
 
 let dlist = new DoublyLinkedList();
