@@ -535,18 +535,99 @@ class BST {
     traverse(this.root)
     return res;
   }
+
+  dfsIn(){
+    const res = [];
+    function traverse(node){
+      if(node.left) traverse(node.left);
+      res.push(node.val);
+      if(node.right) traverse(node.right);
+    }
+    traverse(this.root)
+    return res;
+  }
 }
 
-const bst = new BST();
-bst.insert(10)
-bst.insert(13)
-bst.insert(15)
-bst.insert(7)
-bst.insert(11)
-bst.insert(2)
-bst.insert(5)
+// const bst = new BST();
+// bst.insert(10)
+// bst.insert(13)
+// bst.insert(15)
+// bst.insert(7)
+// bst.insert(11)
+// bst.insert(2)
+// bst.insert(5)
 
-// console.log(bst.find(10))
-// console.log(bst.ibfs())
-// console.log(bst.dfsPre())
-console.log(bst.dfsPost())
+// // console.log(bst.find(10))
+// // console.log(bst.ibfs())
+// // console.log(bst.dfsPre())
+// // console.log(bst.dfsPost())
+// console.log(bst.dfsIn())
+
+//// --------> Heaps
+
+class MaxBinaryHeap{
+  constructor(){
+    this.values = [41,39,33,18,27,12]
+  }
+  
+  insert(val){
+    this.values.push(val);
+    this.bubbleUp()
+  }
+
+  bubbleUp(){
+    let idx = this.values.length - 1;
+    const ele = this.values[idx];
+    while(idx > 0){
+      let parentIdx = Math.floor((idx - 1)/2);
+      let parent = this.values[parentIdx];
+      if (ele <= parent) break;
+      this.values[parentIdx] = ele
+      this.values[idx] = parent
+      idx = parentIdx;
+    }
+  }
+
+  extractMax(){
+    // [this.values[0], this.values[this.values.length - 1] = this.values[this.values.length - 1], this.values[0]]
+    let temp = this.values[0];
+    this.values[0] = this.values[this.values.length-1]
+    this.values[this.values.length-1] = temp
+    // console.log(this.values)
+    const root = this.values.pop();
+    this.siftDown();
+    return root;
+  }
+
+  siftDown(){
+    let idx = 0;
+    const ele = this.values[idx];
+    while(true){
+      let leftChild = this.values[(2*idx+1)];
+      let rightChild = this.values[(2*idx+2)];
+      if (leftChild > rightChild){
+        if(ele < leftChild) {
+          this.values[2*idx+1] = ele;
+          this.values[idx] = leftChild;
+          idx = 2*idx+1;
+        } else {
+          break
+        }
+      }else{
+        if(ele < rightChild) {
+          this.values[2*idx+2] = ele;
+          this.values[idx] = rightChild;
+          idx = 2*idx+2;
+        } else {
+          break
+        }
+      }
+    }
+  }
+}
+
+const maxH = new MaxBinaryHeap();
+maxH.insert(55)
+maxH.insert(1)
+maxH.extractMax()
+console.log(maxH)
