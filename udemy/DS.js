@@ -857,11 +857,16 @@ class HashTable{
 
 class Graph {
   constructor(){
-    this.adjecencyList = {};
+    this.adjacencyList = {};
   }
 
   addVertex(val){
-    this.adjecencyList[val] = [];
+    if (!this.adjacencyList[val]) this.adjacencyList[val] = [];
+  }
+
+  addEdge(v1, v2){
+    this.adjacencyList[v1].push(v2)
+    this.adjacencyList[v2].push(v1)
   }
 }
 
@@ -869,4 +874,37 @@ const g = new Graph();
 g.addVertex('Tokyo')
 g.addVertex('Dubai')
 g.addVertex('Honolulu')
+g.addEdge('Honolulu', 'Tokyo')
 console.log(g);
+
+
+/// ------ cleaner solution to my Coding Challenge
+
+function braces(vals){
+  return vals.map(s => {
+    if(validParen(s)) return 'YES'
+    else return 'NO'
+  })
+}
+
+function validParen(s){
+  let obj = {
+    '{': '}',
+    '[': ']',
+    '(': ')'
+  }
+  let stack = [];
+  for(let i = 0; i < s.length; i++){
+    if(obj[s[i]]){
+      stack.push(s[i])
+    } else {
+      if (obj[stack.pop()] !== s[i]) return false;
+    }
+    console.log(stack)
+  }
+
+  return stack.length === 0;
+}
+
+// console.log(braces(['[{()}]', '[]]{', '{}', '[]()}', '{']))
+// ------
