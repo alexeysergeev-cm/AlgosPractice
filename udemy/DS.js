@@ -603,25 +603,47 @@ class MaxBinaryHeap{
     let idx = 0;
     const ele = this.values[idx];
     while(true){
-      let leftChild = this.values[(2*idx+1)];
-      let rightChild = this.values[(2*idx+2)];
-      if (leftChild > rightChild){
-        if(ele < leftChild) {
-          this.values[2*idx+1] = ele;
-          this.values[idx] = leftChild;
-          idx = 2*idx+1;
-        } else {
-          break
-        }
-      }else{
-        if(ele < rightChild) {
-          this.values[2*idx+2] = ele;
-          this.values[idx] = rightChild;
-          idx = 2*idx+2;
-        } else {
-          break
+      // let leftChild = this.values[(2*idx+1)];
+      // let rightChild = this.values[(2*idx+2)];
+      // if (leftChild > rightChild){
+      //   if(ele < leftChild) {
+      //     this.values[2*idx+1] = ele;
+      //     this.values[idx] = leftChild;
+      //     idx = 2*idx+1;
+      //   } else {
+      //     break
+      //   }
+      // }else{
+      //   if(ele < rightChild) {
+      //     this.values[2*idx+2] = ele;
+      //     this.values[idx] = rightChild;
+      //     idx = 2*idx+2;
+      //   } else {
+      //     break
+      //   }
+      // }
+
+      let leftIdx = 2*idx+1;
+      let rightIdx = 2*idx+2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if(leftIdx < this.values.length){
+        leftChild = this.values[leftIdx]
+        if(leftChild > ele){
+          swap = leftIdx
         }
       }
+      if(rightIdx < this.values.length){
+        rightChild = this.values[rightIdx]
+        if((swap === null && rightChild > ele) || (swap !== null && rightChild > leftChild)){
+          swap = rightIdx
+        }
+      }
+      if(swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = ele;
+      idx = swap
     }
   }
 }
