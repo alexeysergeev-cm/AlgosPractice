@@ -749,9 +749,105 @@ class PriorityQueue {
   }
 }
 
-const ER = new PriorityQueue();
-ER.enqueue('cold', 5)
-ER.enqueue('gunshout wound', 1)
-ER.enqueue('fever', 4)
-console.log(ER)
-console.log(ER.dequeue())
+// const ER = new PriorityQueue();
+// ER.enqueue('cold', 5)
+// ER.enqueue('gunshout wound', 1)
+// ER.enqueue('fever', 4)
+// console.log(ER)
+// console.log(ER.dequeue())
+
+
+
+
+
+
+///-----------------_> Hash Tables/Maps
+
+//make arrLength prime number too to decrease number of collisions
+function hash(key, arrLength){
+  let total = 0;
+  let WEIRD_PRIME = 31;
+
+  for (let i = 0; i < Math.min(key.length, 100); i++){
+    let char = key[i];
+    let val = char.charCodeAt(0) - 96;
+    total = (total * WEIRD_PRIME + val) % arrLength;
+  }
+  return total 
+}
+
+// console.log(hash('pink', 13))
+// console.log(hash('pinky', 13))
+// console.log(hash('cyan', 13))
+
+class HashTable{
+  constructor(size=53){
+    this.keyMap = new Array(size);
+  }
+
+  _hash(key){
+    let total = 0;
+    let WEIRD_PRIME = 31;
+
+    for (let i = 0; i < Math.min(key.length, 100); i++){
+      let char = key[i];
+      let val = char.charCodeAt(0) - 96;
+      total = (total * WEIRD_PRIME + val) % this.keyMap.length;
+    }
+    return total 
+  }
+
+  set(k, v){
+    let store = this._hash(k);
+    this.keyMap[store] ? this.keyMap[store].push([k, v]) : this.keyMap[store] = [[k, v]]
+    return true;
+  }
+
+  get(k){
+    let find = this._hash(k);
+    if (this.keyMap[find]){
+      for(let i = 0; i < this.keyMap[find].length; i++){
+        if (this.keyMap[find][i][0] === k) return this.keyMap[find][i][1];
+      }
+    }
+    return undefined; 
+
+  }
+
+  keys(){
+    let keysArr = [];
+    for(let i = 0; i < this.keyMap.length; i++){
+      if(this.keyMap[i]){
+        for(let j = 0; j < this.keyMap[i].length; j++){
+          if(!keysArr.includes(this.keyMap[i][j][0])){
+            keysArr.push(this.keyMap[i][j][0]);
+          }
+        }
+      }
+    }
+    return keysArr;
+  }
+
+  values(){
+    let valuesArr = [];
+    for(let i = 0; i < this.keyMap.length; i++){
+      if(this.keyMap[i]){
+        for(let j = 0; j < this.keyMap[i].length; j++){
+          if(!valuesArr.includes(this.keyMap[i][j][1])){
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+    }
+    return valuesArr;
+  }
+}
+
+
+const ht = new HashTable();
+ht.set('cyan', 'ff0000');
+ht.set('pink', 'ff1100');
+// console.log(ht.get('pink'));
+// console.log(ht.get('cyan'));
+console.log(ht.keys())
+console.log(ht.values())
