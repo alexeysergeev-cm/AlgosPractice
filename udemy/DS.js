@@ -844,10 +844,29 @@ class HashTable{
 }
 
 
-const ht = new HashTable();
-ht.set('cyan', 'ff0000');
-ht.set('pink', 'ff1100');
-// console.log(ht.get('pink'));
-// console.log(ht.get('cyan'));
-console.log(ht.keys())
-console.log(ht.values())
+// const ht = new HashTable();
+// ht.set('cyan', 'ff0000');
+// ht.set('pink', 'ff1100');
+// // console.log(ht.get('pink'));
+// // console.log(ht.get('cyan'));
+// console.log(ht.keys())
+// console.log(ht.values())
+
+
+///--------------------> Graphs
+
+class Graph {
+  constructor(){
+    this.adjecencyList = {};
+  }
+
+  addVertex(val){
+    this.adjecencyList[val] = [];
+  }
+}
+
+const g = new Graph();
+g.addVertex('Tokyo')
+g.addVertex('Dubai')
+g.addVertex('Honolulu')
+console.log(g);
