@@ -443,13 +443,13 @@ class Queue{
 
 ///------> BST
 
-class Node{
-  constructor(val){
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
-}
+// class Node{
+//   constructor(val){
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
 
 class BST {
   constructor(){
@@ -650,8 +650,108 @@ class MaxBinaryHeap{
   }
 }
 
-const maxH = new MaxBinaryHeap();
-maxH.insert(55)
-maxH.insert(1)
-maxH.extractMax()
-console.log(maxH)
+// const maxH = new MaxBinaryHeap();
+// maxH.insert(55)
+// maxH.insert(1)
+// maxH.extractMax()
+// console.log(maxH)
+
+class Node {
+  constructor(val, priority){
+    this.val = val;
+    this.priority = priority;
+  }
+}
+
+class PriorityQueue {
+  constructor(){
+    this.values = []
+  }
+  
+  enqueue(val,priority){
+    let newNode = new Node(val, priority)
+    this.values.push(newNode);
+    this.bubbleUp()
+  }
+
+  bubbleUp(){
+    let idx = this.values.length - 1;
+    const ele = this.values[idx];
+    while(idx > 0){
+      let parentIdx = Math.floor((idx - 1)/2);
+      let parent = this.values[parentIdx];
+      if (ele.priority >= parent.priority) break;
+      this.values[parentIdx] = ele
+      this.values[idx] = parent
+      idx = parentIdx;
+    }
+  }
+
+  dequeue(){
+    // [this.values[0], this.values[this.values.length - 1] = this.values[this.values.length - 1], this.values[0]]
+    let temp = this.values[0];
+    this.values[0] = this.values[this.values.length-1]
+    this.values[this.values.length-1] = temp
+    // console.log(this.values)
+    const root = this.values.pop();
+    if (this.values.length > 0) {
+      this.siftDown();
+    }
+    return root;
+  }
+
+  siftDown(){
+    let idx = 0;
+    const ele = this.values[idx];
+    while(true){
+      // let leftChild = this.values[(2*idx+1)];
+      // let rightChild = this.values[(2*idx+2)];
+      // if (leftChild > rightChild){
+      //   if(ele < leftChild) {
+      //     this.values[2*idx+1] = ele;
+      //     this.values[idx] = leftChild;
+      //     idx = 2*idx+1;
+      //   } else {
+      //     break
+      //   }
+      // }else{
+      //   if(ele < rightChild) {
+      //     this.values[2*idx+2] = ele;
+      //     this.values[idx] = rightChild;
+      //     idx = 2*idx+2;
+      //   } else {
+      //     break
+      //   }
+      // }
+
+      let leftIdx = 2*idx+1;
+      let rightIdx = 2*idx+2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if(leftIdx < this.values.length){
+        leftChild = this.values[leftIdx]
+        if(leftChild.priority < ele.priority){
+          swap = leftIdx
+        }
+      }
+      if(rightIdx < this.values.length){
+        rightChild = this.values[rightIdx]
+        if((swap === null && rightChild.priority < ele.priority) || (swap !== null && rightChild.priority < leftChild.priority)){
+          swap = rightIdx
+        }
+      }
+      if(swap === null) break;
+      this.values[idx] = this.values[swap];
+      this.values[swap] = ele;
+      idx = swap
+    }
+  }
+}
+
+const ER = new PriorityQueue();
+ER.enqueue('cold', 5)
+ER.enqueue('gunshout wound', 1)
+ER.enqueue('fever', 4)
+console.log(ER)
+console.log(ER.dequeue())
