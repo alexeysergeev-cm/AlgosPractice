@@ -595,7 +595,9 @@ class MaxBinaryHeap{
     this.values[this.values.length-1] = temp
     // console.log(this.values)
     const root = this.values.pop();
-    this.siftDown();
+    if (this.values.length > 0) {
+      this.siftDown();
+    }
     return root;
   }
 
