@@ -881,6 +881,58 @@ class Graph {
     });
     delete this.adjacencyList[val];
   }
+
+  DFSr(node){
+    let visited = new Set();
+    const adjacencyList = this.adjacencyList;
+
+    (function rec(start){
+      if(!start) return null;
+      visited.add(start)
+      adjacencyList[start].forEach(ele => {
+        if(!visited.has(ele)){
+          return rec(ele);
+        }
+      })
+    })(node);
+    return Array.from(visited);
+  }
+
+  DFSi(start){
+    const stack = [start];
+    const visited = new Set();
+
+    while(stack.length){
+      let vis = stack.pop();
+      if(!visited.has(vis)){
+        visited.add(vis);
+        stack.push(...this.adjacencyList[vis]);
+      }
+    }
+    return Array.from(visited);
+  }
+
+  BFSi(start){
+    const queue = [start];
+    const visited = new Set();
+
+    while(queue.length){
+      // console.log(queue)
+      let vis = queue.shift();
+      visited.add(vis);
+      this.adjacencyList[vis].forEach(ele => {
+        if (!visited.has(ele)){
+          queue.push(ele)
+          visited.add(ele);
+        }
+      })
+      // if(!visited.has(vis)){
+      //   visited.add(vis);
+      //   queue.push(...this.adjacencyList[vis]);
+      // }
+    }
+    return Array.from(visited);
+  }
 }
 
 const g = new Graph();
@@ -890,11 +942,15 @@ g.addVertex('Honolulu')
 g.addVertex('Moscow')
 g.addEdge('Honolulu', 'Tokyo')
 g.addEdge('Honolulu', 'Moscow')
-// g.removeEdge('Honolulu', 'Moscow')
+g.addEdge('Honolulu', 'Dubai')
+g.addEdge('Tokyo', 'Dubai')
 console.log(g);
-g.removeVertex('Moscow')
+// g.removeVertex('Moscow')
 
-console.log(g);
+// console.log(g.DFSr('Moscow'));
+// console.log(g.DFSi('Moscow'));
+console.log(g.BFSi('Moscow'));
+
 
 
 /// ------ cleaner solution to my Coding Challenge
