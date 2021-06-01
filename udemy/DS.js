@@ -868,13 +868,23 @@ class Graph {
     this.adjacencyList[v1].push(v2)
     this.adjacencyList[v2].push(v1)
   }
+
+  removeEdge(v1, v2){
+    let idx1 = this.adjacencyList[v1].indexOf(v2)
+    this.adjacencyList[v1].splice(idx1 ,1)
+    this.adjacencyList[v2] = this.adjacencyList[v2].filter(v => v !== v1) 
+  }
 }
 
 const g = new Graph();
 g.addVertex('Tokyo')
 g.addVertex('Dubai')
 g.addVertex('Honolulu')
+g.addVertex('Moscow')
 g.addEdge('Honolulu', 'Tokyo')
+g.addEdge('Honolulu', 'Moscow')
+g.removeEdge('Honolulu', 'Moscow')
+
 console.log(g);
 
 
