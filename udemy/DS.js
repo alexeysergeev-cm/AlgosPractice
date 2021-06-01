@@ -874,6 +874,13 @@ class Graph {
     this.adjacencyList[v1].splice(idx1 ,1)
     this.adjacencyList[v2] = this.adjacencyList[v2].filter(v => v !== v1) 
   }
+
+  removeVertex(val){
+    this.adjacencyList[val].forEach(ele => {
+      this.removeEdge(ele, val)
+    });
+    delete this.adjacencyList[val];
+  }
 }
 
 const g = new Graph();
@@ -883,7 +890,9 @@ g.addVertex('Honolulu')
 g.addVertex('Moscow')
 g.addEdge('Honolulu', 'Tokyo')
 g.addEdge('Honolulu', 'Moscow')
-g.removeEdge('Honolulu', 'Moscow')
+// g.removeEdge('Honolulu', 'Moscow')
+console.log(g);
+g.removeVertex('Moscow')
 
 console.log(g);
 
