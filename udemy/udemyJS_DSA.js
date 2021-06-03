@@ -309,7 +309,7 @@ function selectionSort(arr){
 
 //insertion Sort
 
-function insertionSort(arr){
+function inserationSort(arr){
 
   for(let i = 1; i < arr.length; i++){
     let cur = arr[i];
@@ -424,10 +424,10 @@ function radixSort(arr){
   return arr;
 }
 
-console.log(getDigit(12, 1))
-console.log(digitCount(1234))
-console.log(mostDigits([1, 23, 34,567, 7892, 391823]))
-console.log(radixSort([1, 23, 34,567, 7892, 391823, 1823, 1,5, 81,91, 23,4]))
+// console.log(getDigit(12, 1))
+// console.log(digitCount(1234))
+// console.log(mostDigits([1, 23, 34,567, 7892, 391823]))
+// console.log(radixSort([1, 23, 34,567, 7892, 391823, 1823, 1,5, 81,91, 23,4]))
 
 
 
@@ -451,4 +451,29 @@ function longestPal(str){
   return longest;
 }
 
-console.log(longestPal('babcbabcbaccba'))
+// console.log(longestPal('babcbabcbaccba'))
+
+
+function insertionSort(arr, cb){
+  // add whatever parameters you deem necessary - good luck!
+  if(typeof cb === 'undefined') cb = (a,b) => {
+      if(a < b) return -1;
+      if(a > b) return 1;
+      return 0;
+  }
+  
+  for(let i = 1; i < arr.length; i++){
+      let cur = arr[i]
+      let idx; 
+      console.log(cur, idx)
+      for(let j = i - 1;j >= 0 && (cb(arr[j], cur) > 0);j--){
+          idx = j;
+          arr[j+1] = arr[j];
+      }
+      if (idx) arr[idx] = cur;
+  }
+  
+  return arr
+}
+
+// console.log(insertionSort([4,20,12,10,7,9]))
