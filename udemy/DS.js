@@ -935,21 +935,21 @@ class Graph {
   }
 }
 
-const g = new Graph();
-g.addVertex('Tokyo')
-g.addVertex('Dubai')
-g.addVertex('Honolulu')
-g.addVertex('Moscow')
-g.addEdge('Honolulu', 'Tokyo')
-g.addEdge('Honolulu', 'Moscow')
-g.addEdge('Honolulu', 'Dubai')
-g.addEdge('Tokyo', 'Dubai')
-console.log(g);
-// g.removeVertex('Moscow')
+// const g = new Graph();
+// g.addVertex('Tokyo')
+// g.addVertex('Dubai')
+// g.addVertex('Honolulu')
+// g.addVertex('Moscow')
+// g.addEdge('Honolulu', 'Tokyo')
+// g.addEdge('Honolulu', 'Moscow')
+// g.addEdge('Honolulu', 'Dubai')
+// g.addEdge('Tokyo', 'Dubai')
+// console.log(g);
+// // g.removeVertex('Moscow')
 
-// console.log(g.DFSr('Moscow'));
-// console.log(g.DFSi('Moscow'));
-console.log(g.BFSi('Moscow'));
+// // console.log(g.DFSr('Moscow'));
+// // console.log(g.DFSi('Moscow'));
+// console.log(g.BFSi('Moscow'));
 
 
 
@@ -983,3 +983,142 @@ function validParen(s){
 
 // console.log(braces(['[{()}]', '[]]{', '{}', '[]()}', '{']))
 // ------
+
+
+///----Dijkstra algo
+
+class PriorityQueueGraph{
+  constructor(){
+    this.values = [];
+  }
+
+  enqueue(val, priority){
+    this.values.push({val, priority});
+    this.sort();
+  }
+
+  dequeue(){
+    return this.values.shift();
+  }
+
+  sort(){
+    this.values.sort((a,b) => a.priority-b.priority);
+  }
+}
+
+class WeightedGraph{
+  constructor(){
+    this.adjacencyList = {};
+  }
+
+  addVertex(val){
+    if (!this.adjacencyList[val]) this.adjacencyList[val] = [];
+  }
+
+
+  addEdge(v1, v2, weight){
+    this.adjacencyList[v1].push({node:v2,weight})
+    this.adjacencyList[v2].push({node:v1,weight})
+  }
+
+  Dijkstra(start, finish){
+    const nodes = new PriorityQueueGraph();
+    const distances = {};
+    const previous = {};
+    let path = []; //return at the end
+    let smallest;
+    //build up initial state;
+    for(let vertex in this.adjacencyList){
+      if(vertex === start){
+        distances[vertex] = 0;
+        nodes.enqueue(vertex, 0);
+      }else{
+        distances[vertex] = Infinity;
+        nodes.enqueue(vertex, Infinity);
+      }
+      previous[vertex] = null;
+    }
+    //as long as there is somehting to visit
+    while(nodes.values.length){
+      smallest = nodes.dequeue().val;
+      if (smallest === finish){
+        //we are done
+        //return arr 
+        while(previous[smallest]){
+          path.push(smallest);
+          smallest = previous[smallest]
+        }
+        break;
+      }
+      if (smallest || distances[smallest] !== Infinity){
+        for(let neighbor in this.adjacencyList[smallest]){
+          //find neighboring node
+          let nextNode = this.adjacencyList[smallest][neighbor];
+          //calcutalte dist to neighboring node
+          let candidate = distances[smallest] + nextNode.weight;
+          if(candidate < distances[nextNode.node]){
+            //updating new smallest distance to neighbor
+            distances[nextNode.node] = candidate;
+            //updating previous - how we got to next neighbor
+            previous[nextNode.node] = smallest;
+            //enquue with priority queue ith ne priority
+            nodes.enqueue(nextNode.node, candidate)
+          }
+        }
+      }
+    }
+    return path.concat(smallest).reverse();
+  }
+}
+
+const wg = new WeightedGraph();
+wg.addVertex("A");
+wg.addVertex("B");
+wg.addVertex("C");
+wg.addVertex("D");
+wg.addVertex("E");
+wg.addVertex("F");
+
+wg.addEdge("A","B", 4);
+wg.addEdge("A","C", 2);
+wg.addEdge("B","E", 3);
+wg.addEdge("C","D", 2);
+wg.addEdge("C","F", 4);
+wg.addEdge("D","E", 3);
+wg.addEdge("D","F", 1);
+wg.addEdge("E","F", 1);
+
+
+// console.log(wg.Dijkstra("A", "E"));
+// console.log(wg.Dijkstra("A", "C"));
+
+// ["A", "C", "D", "F", "E"]
+
+
+///----Dynamic programming
+
+// function fib(n, memo=[undefined, 1, 1]){
+//   if(memo[n] !== undefined) return memo[n];
+//   let res = fib(n-1,memo) + fib(n-2, memo);
+//   memo[n] = res;
+//   return res
+// }
+
+//tabulated version
+function fib(n){
+  let table = [0,1,1];
+  for(let i = 3; i <= n; i++){
+    table[i] = table[i-1] + table[i-2]
+  }
+  return table[n]
+}
+
+
+
+console.log(fib(10))
+console.log(fib(0))
+console.log(fib(1))
+console.log(fib(2))
+// console.log(fib(110))
+
+
