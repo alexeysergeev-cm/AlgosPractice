@@ -465,15 +465,16 @@ function insertionSort(arr, cb){
   for(let i = 1; i < arr.length; i++){
       let cur = arr[i]
       let idx; 
-      console.log(cur, idx)
-      for(let j = i - 1;j >= 0 && (cb(arr[j], cur) > 0);j--){
+      for(var j = i - 1;j >= 0 && (cb(arr[j], cur) > 0);j--){
           idx = j;
           arr[j+1] = arr[j];
       }
-      if (idx) arr[idx] = cur;
+      // if (idx) arr[idx] = cur;
+      arr[j+1] = cur
   }
   
   return arr
 }
 
 // console.log(insertionSort([4,20,12,10,7,9]))
+console.log(insertionSort([0,-10,7,4]))
