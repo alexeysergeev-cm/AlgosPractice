@@ -477,4 +477,33 @@ function insertionSort(arr, cb){
 }
 
 // console.log(insertionSort([4,20,12,10,7,9]))
-console.log(insertionSort([0,-10,7,4]))
+// console.log(insertionSort([0,-10,7,4]))
+
+
+function coinChange(coins, val) {
+  // add whatever parameters you deem necessary - good luck!
+
+  //iterate trhu arr,
+  //pick the denomination and create binary tree 
+  //see how many variants
+  //use recur?
+  if (val === 0) return 1
+  if (val < 0) return 0
+  let ways = [];
+  coins.forEach(coin => {
+
+    if (coin <= val) {
+      ways += coinChange(coins, val - coin)
+    }
+
+  })
+  // console.log(ways)
+  return ways
+
+
+}
+
+console.log(coinChange([1,5,10,20],1))
+console.log(coinChange([1,5,10,20],2))
+console.log(coinChange([1,5,10,20],5))
+console.log(coinChange([1,5,10,20],10))
