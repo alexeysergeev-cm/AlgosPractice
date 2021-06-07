@@ -803,3 +803,14 @@ var diStringMatch = function(s) {
     //res[s.length] = min
     return res;
 };
+
+///height checker
+var heightChecker = function(heights) {
+    let sorted = heights.slice();
+    sorted.sort((a,b)=>a-b);
+    
+    return sorted.reduce((acc,val,i)=>{
+        if(val !== heights[i]) acc++;
+        return acc;
+    }, 0)
+};
