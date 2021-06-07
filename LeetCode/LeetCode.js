@@ -781,3 +781,25 @@ var hasCycle = function(head) {
     return false;
     
 };
+
+
+//DiString
+var diStringMatch = function(s) {
+    //min ele = 0
+    //max ele == s.length;
+    //keep track of min /max?
+    //iterate over s, --max ++max;
+    
+    let min = 0; //2
+    let max = s.length; //2
+    let res = [];
+    let i = 0;
+    while(i <= s.length){
+        if (s[i] === 'I') res.push(min), min++;
+        if (s[i] === 'D') res.push(max), max--;
+        if (s[i] === undefined) res.push(min), min++;
+        i++;
+    }
+    
+    return res;
+};
