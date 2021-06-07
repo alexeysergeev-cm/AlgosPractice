@@ -797,9 +797,9 @@ var diStringMatch = function(s) {
     while(i <= s.length){
         if (s[i] === 'I') res.push(min), min++;
         if (s[i] === 'D') res.push(max), max--;
-        if (s[i] === undefined) res.push(min), min++;
+        if (s[i] === undefined) res.push(min)
         i++;
     }
-    
+    //res[s.length] = min
     return res;
 };
