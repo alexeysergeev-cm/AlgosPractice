@@ -855,3 +855,21 @@ var sortByBits = function(arr) {
     
     return arr.sort((a,b) => bits(a)-bits(b) || a-b)
 }
+
+
+///do unique occurances 
+
+var uniqueOccurrences = function(arr) {
+    //iterate and count to an object
+    //iterate over obj and see if value been seen?
+    
+    let obj = {}
+    
+    arr.forEach(e => {
+        obj[e] ? obj[e]++ : obj[e] = 1
+    })
+    
+    let res = Object.values(obj)
+    
+    return res.length === new Set(res).size
+};
