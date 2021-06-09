@@ -844,3 +844,14 @@ var buildArray = function (target, n) {
 
     return res
 };
+
+
+///sort by bits 1's
+var sortByBits = function(arr) {
+    const bits = (num) => {
+        let n = (num>>>0).toString(2).match(/1/g)
+        return n ? n.length : 0; 
+    }
+    
+    return arr.sort((a,b) => bits(a)-bits(b) || a-b)
+}
