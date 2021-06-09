@@ -814,3 +814,33 @@ var heightChecker = function(heights) {
         return acc;
     }, 0)
 };
+
+
+//build stack array
+
+var buildArray = function (target, n) {
+    //create var res = []
+    //create var i = 1;
+    //iterate tru target arr
+    //if target[j] == i push
+    //else push, pop
+    //i++
+    //return res
+
+    const res = [];
+
+    let i = 1;
+    let j = 0;
+    while (j < n) {
+        if (target[j] === undefined) break;
+        if (target[j] === i) {
+            res.push('Push')
+            j++
+        } else {
+            res.push('Push', 'Pop')
+        }
+        i++
+    }
+
+    return res
+};
