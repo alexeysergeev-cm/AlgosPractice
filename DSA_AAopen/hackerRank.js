@@ -45,8 +45,23 @@ function deleteProducts(ids, m){
 }
 
 let arr = [1,2,3,1,2,2,1]
-let m = 2;
-console.log(deleteProducts(arr,3))
-console.log(deleteProducts([2,3,2,2],3))
-console.log(deleteProducts([1,1,5,5],2))
-console.log(deleteProducts([1,2,1,2,2,1],1))
+// let m = 2;
+// console.log(deleteProducts(arr,3))
+// console.log(deleteProducts([2,3,2,2],3))
+// console.log(deleteProducts([1,1,5,5],2))
+// console.log(deleteProducts([1,2,1,2,2,1],1))
+
+function anagram(s) {
+    // Write your code here
+    if (s.length % 2) return -1
+    let mid = Math.floor(s.length/2)
+    let left = s.slice(0, mid).split('').sort()
+    let right = s.slice(mid).split('').sort()
+    console.log(left,right)
+    let count = 0;
+    left.forEach((e,i) => {if(e !== right[i]) count++})
+    
+    return count;
+}
+
+console.log(anagram('immceukpupwhgaosececxmueynudagpiudmyaxpuondunrortutthpzhftkfzbpvhdthckdqxgmkzbbvvxoeopmvjyakcrgjvzqxmvqjbcuafxvdwljnbvimwlwyccjzezzqwpzxtvzzvxetkninlrzhcwhgyqgerfunwwmptlqqkukxiukvlkcpilyibgnsnjhjhtabgrttnfqxaaslmwduhddijqcwblhjejmnafgqlwnlwiyjebfogiypadncowntgzgiemypkocgybrcexslhraiuqmimzdsyldezbwjryspzlueimrqdrazjmkwnpqlbtrcxnoomgenryrckiuqcurlidjvtaiwvzasnohbunoolgqxqmpuijiqmrnhtvdrugjjuskpfzfshxszjhurqcjfvwmprsinyrxsmhjtgomplgpwnjng'))
