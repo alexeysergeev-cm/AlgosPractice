@@ -65,3 +65,21 @@ function anagram(s) {
 }
 
 console.log(anagram('immceukpupwhgaosececxmueynudagpiudmyaxpuondunrortutthpzhftkfzbpvhdthckdqxgmkzbbvvxoeopmvjyakcrgjvzqxmvqjbcuafxvdwljnbvimwlwyccjzezzqwpzxtvzzvxetkninlrzhcwhgyqgerfunwwmptlqqkukxiukvlkcpilyibgnsnjhjhtabgrttnfqxaaslmwduhddijqcwblhjejmnafgqlwnlwiyjebfogiypadncowntgzgiemypkocgybrcexslhraiuqmimzdsyldezbwjryspzlueimrqdrazjmkwnpqlbtrcxnoomgenryrckiuqcurlidjvtaiwvzasnohbunoolgqxqmpuijiqmrnhtvdrugjjuskpfzfshxszjhurqcjfvwmprsinyrxsmhjtgomplgpwnjng'))
+
+function makingAnagrams(s1, s2) {
+    // Write your code here
+    let obj = {}
+    for(let char of s1){
+        obj[char] ? obj[char]++ : obj[char] = 1; 
+    }
+    
+    let notDelete = 0;
+    for(let char of s2){
+        if (obj[char]) {
+            obj[char]--
+            notDelete++;
+        }
+    }
+    
+    return s1.length-notDelete + s2.length-notDelete;
+}
