@@ -83,3 +83,20 @@ function makingAnagrams(s1, s2) {
     
     return s1.length-notDelete + s2.length-notDelete;
 }
+
+
+function gameOfThrones(s) {
+    // Write your code here
+    let obj = {};
+    for(let char of s){
+        obj[char] ? obj[char]++ : obj[char] = 1; 
+    }
+    
+    let v = Object.values(obj).filter(e => e%2);
+    if(s.length % 2){
+        if (v.length === 1) return 'YES'
+    } else {
+        if (!v.length) return 'YES'
+    }
+    return 'NO'
+}
