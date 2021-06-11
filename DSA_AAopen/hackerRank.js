@@ -100,3 +100,28 @@ function gameOfThrones(s) {
     }
     return 'NO'
 }
+
+
+function minimumSwaps(arr) {
+    let swaps = 0;
+    const l = arr.length;
+
+    let arr2 = arr.slice().sort((a, b) => a - b);
+    let map = arr.reduce((acc, val, i) => {
+        acc[val] = i
+        return acc
+    }, {});
+
+    for (let i = 0; i < l; i++) {
+        let v1 = arr[i]
+        let v2 = arr2[i]
+        if (v1 !== v2) {
+            swaps++
+            const idx = map[v2]
+            arr[idx] = v1;
+            arr[i] = v2;
+            map[v1] = idx;
+        }
+    }
+    return swaps
+}
