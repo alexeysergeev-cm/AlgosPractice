@@ -64,7 +64,7 @@ function anagram(s) {
     return count;
 }
 
-console.log(anagram('immceukpupwhgaosececxmueynudagpiudmyaxpuondunrortutthpzhftkfzbpvhdthckdqxgmkzbbvvxoeopmvjyakcrgjvzqxmvqjbcuafxvdwljnbvimwlwyccjzezzqwpzxtvzzvxetkninlrzhcwhgyqgerfunwwmptlqqkukxiukvlkcpilyibgnsnjhjhtabgrttnfqxaaslmwduhddijqcwblhjejmnafgqlwnlwiyjebfogiypadncowntgzgiemypkocgybrcexslhraiuqmimzdsyldezbwjryspzlueimrqdrazjmkwnpqlbtrcxnoomgenryrckiuqcurlidjvtaiwvzasnohbunoolgqxqmpuijiqmrnhtvdrugjjuskpfzfshxszjhurqcjfvwmprsinyrxsmhjtgomplgpwnjng'))
+// console.log(anagram('immceukpupwhgaosececxmueynudagpiudmyaxpuondunrortutthpzhftkfzbpvhdthckdqxgmkzbbvvxoeopmvjyakcrgjvzqxmvqjbcuafxvdwljnbvimwlwyccjzezzqwpzxtvzzvxetkninlrzhcwhgyqgerfunwwmptlqqkukxiukvlkcpilyibgnsnjhjhtabgrttnfqxaaslmwduhddijqcwblhjejmnafgqlwnlwiyjebfogiypadncowntgzgiemypkocgybrcexslhraiuqmimzdsyldezbwjryspzlueimrqdrazjmkwnpqlbtrcxnoomgenryrckiuqcurlidjvtaiwvzasnohbunoolgqxqmpuijiqmrnhtvdrugjjuskpfzfshxszjhurqcjfvwmprsinyrxsmhjtgomplgpwnjng'))
 
 function makingAnagrams(s1, s2) {
     // Write your code here
@@ -125,3 +125,63 @@ function minimumSwaps(arr) {
     }
     return swaps
 }
+
+
+function minimumBribes(q) {
+
+    // let total = 0;
+    
+    // for (let i = q.length - 1; i >= 0; i--) {
+
+    //     if (q[i] > q[i + 1]) {
+   
+    //         let ele = q.splice(i, 1)[0]
+            
+    //         let j = i + 1;
+    //         let c = 0;
+
+
+    //         while (ele > q[j]) {
+    //             console.log(j)
+    //             if(c === 2){
+    //                 console.log('Too chaotic');
+    //                 return
+    //             }
+    //             c++
+    //             j++
+    //         }
+    //         total += c;
+    //         q.splice(j, 0, ele)
+
+
+
+    //     }
+    // }
+
+    // console.log(total)
+
+    // return total
+
+    let swaps = 0
+    let min = q.length;
+    for (var i = q.length - 1; i >= 0; i--) {
+        if (q[i] - i > 3) {
+            console.log(`Too chaotic`)
+            return
+        }
+        if (q[i] > i + 1) {
+            swaps += (q[i] - (i + 1));
+        } else {
+            if (min > q[i]) {
+                min = q[i];
+            } else if (q[i] != min) {
+                swaps++;
+            }
+        }
+    }
+
+    console.log(swaps)
+}
+
+console.log(minimumBribes([1,2, 5, 3, 7, 8, 6, 4]))
+// console.log(minimumBribes([5, 1, 2, 3, 7, 8, 6, 4]))
