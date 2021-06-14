@@ -60,3 +60,44 @@ var minDepth = function(root) {
     
     return 0
 };
+
+///minimum Jumps BFS
+
+var minimumJumps = function(forbidden, a, b, x) {
+    if(x < 0) return -1;
+    if(x === 0) return 0;
+    
+
+    
+    let q = [[0,false,0]];
+    let seen = forbidden.reduce((acc,val,i) => {
+        acc[val] = true;
+        return acc
+    }, {});
+
+    // console.log(seen)
+    while(q.length){
+        // console.log(q)
+        const [location, backJump, jump] = q.shift();
+        
+        if(location === x) return jump;
+        
+        if(seen[location]) {
+            continue;
+        }
+        
+        seen[location] = true;
+        
+        let nextJump; 
+        
+        //check allowed backJump
+        if(!backJump && location - b >= 0){
+            nextJump = [location-b, true, jump+1];
+            q.push(nextJump);
+        }
+        
+        nextJump = [location+a, false, jump+1];
+        if(nextJump[0] <= 2000+a+b) q.push(nextJump);
+    }
+    return -1;
+};
