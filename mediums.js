@@ -41,3 +41,22 @@ console.log(minMoves(10,0,0,0,2))
 console.log(minMoves(6,5,1,0,5))
 console.log(minMoves(9,4,4,4,8))
 console.log(minMoves(9,4,4,4,4))
+
+
+//mid depth binary tree BFS
+var minDepth = function(root) {
+    if(root === null) return 0
+    
+    let queue = [[root, 1]];
+    
+    while(queue.length){
+        let cur = queue.shift();
+        let node = cur[0]
+        let level = cur[1]
+        if(!node.left && !node.right) return level;
+        if(node.left) queue.push([node.left,level+1]);
+        if(node.right) queue.push([node.right,level+1]);
+    }
+    
+    return 0
+};
