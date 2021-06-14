@@ -101,3 +101,39 @@ var minimumJumps = function(forbidden, a, b, x) {
     }
     return -1;
 };
+
+
+///frog's min side jumps (dont work with mega array)
+
+var minSideJumps = function(obstacles) {
+    //my location
+    //look forward to see obstacles
+    //jump if other track if not blocked
+    //track side jumps
+    
+    let q = [[0, 2, 0]]; 
+    let res = [];
+    
+    while(q.length){
+        let [position, track, sideJumps] = q.shift();
+        
+
+        while(position < obstacles.length){
+            let nextMove = obstacles[position+1];
+            if(nextMove === track){
+                let blockedTrack = obstacles[position]
+                let ways = [1,2,3].filter(e => e !== track && e !== blockedTrack) 
+                ways.forEach(newTrack => {
+                    q.push([position, newTrack, sideJumps+1])
+                })
+                break;
+            }
+            position++;
+            if(position === obstacles.length){
+                res.push(sideJumps)
+            }
+        }
+    }
+
+    return Math.min(...res)
+};
