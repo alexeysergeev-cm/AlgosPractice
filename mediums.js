@@ -174,5 +174,55 @@ function strokesRequired(picture){
   return res
 }
 
-console.log(strokesRequired(['aaaba', 'ababa','aaaca']));
-console.log(strokesRequired([ "bbba", "abba", "acaa" , "aaac" ]));
+// console.log(strokesRequired(['aaaba', 'ababa','aaaca']));
+// console.log(strokesRequired([ "bbba", "abba", "acaa" , "aaac" ]));
+
+
+var colorBorder = function(grid, r0, c0, color) {
+   
+    if(grid[r0][c0] === color) return grid
+    
+    const visited = new Array(grid.length).fill(0).map( row => {
+        return new Array(grid[0].length).fill(false);
+    })
+    
+    let start = grid[r0][c0];
+
+    
+    const dfs = (grid, visited, start, x, y, color) => {
+        
+        if(x < 0 || x === grid.length || y < 0 || y === grid[0].length){
+                return -1;
+        } 
+        
+        if (visited[x][y]) { return color; }
+        if(grid[x][y] !== start) { return -1; }
+        
+        visited[x][y] = true;
+        
+//         const up = x-1
+//         const down = x+1
+//         const left = y-1
+//         const right = y+1
+        
+//         if(up >= 0 && grid[up][y] === start) dfs(up,y,color)
+//         if(down < grid.length && grid[down][y] === start) dfs(down,y,color)
+//         if(left >= 0 && grid[x][left] === start) dfs(x,left,color)
+//         if(up < grid[0].length && grid[x][right] === start) dfs(x,right,color)
+        
+        const v1 = dfs(grid, visited, grid[x][y], x+1, y, color);
+        const v2 = dfs(grid, visited, grid[x][y], x-1, y, color);
+        const v3 = dfs(grid, visited, grid[x][y], x, y+1, color);
+        const v4 = dfs(grid, visited, grid[x][y], x, y-1, color);
+        
+        if( ![v1, v2, v3, v4].every( val => ( val === color || val === start))){
+            grid[x][y] = color;
+        }
+
+        return grid[x][y];
+    }
+    
+    dfs(grid, visited, start, r0, c0, color)
+    
+    return grid
+};
