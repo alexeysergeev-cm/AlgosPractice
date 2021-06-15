@@ -37,10 +37,10 @@ function minMoves(n, startRow, startCol, endRow, endCol){
   return -1;
 }
 
-console.log(minMoves(10,0,0,0,2))
-console.log(minMoves(6,5,1,0,5))
-console.log(minMoves(9,4,4,4,8))
-console.log(minMoves(9,4,4,4,4))
+// console.log(minMoves(10,0,0,0,2))
+// console.log(minMoves(6,5,1,0,5))
+// console.log(minMoves(9,4,4,4,8))
+// console.log(minMoves(9,4,4,4,4))
 
 
 //mid depth binary tree BFS
@@ -137,3 +137,42 @@ var minSideJumps = function(obstacles) {
 
     return Math.min(...res)
 };
+
+
+//bucketfill
+
+function strokesRequired(picture){
+  let pic = picture.reduce((acc,val) => {
+    acc.push(val.split(''))
+    return acc
+  },[])
+
+
+  const dfs = (x, y, cur)=> {
+    const up = x - 1;
+    const down = x + 1;
+    const left = y - 1;
+    const right = y + 1;
+
+    pic[x][y] = 'v';
+    if(up >= 0 && pic[up][y] === cur) dfs(up, y, cur);
+    if(down < pic.length && pic[down][y] === cur) dfs(down, y, cur);
+    if(left >= 0 && pic[x][left] === cur) dfs(x, left, cur);
+    if(right < pic[0].length && pic[x][right] === cur) dfs(x, right, cur)
+  }
+
+  let res = 0;
+  for(let i = 0; i < pic.length; i++){
+    for(let j = 0; j < pic[0].length; j++){
+      if(pic[i][j] !== 'v'){
+        res++;
+        dfs(i, j, pic[i][j]);
+      }    
+    }
+  }
+  // console.log(pic)
+  return res
+}
+
+console.log(strokesRequired(['aaaba', 'ababa','aaaca']));
+console.log(strokesRequired([ "bbba", "abba", "acaa" , "aaac" ]));
