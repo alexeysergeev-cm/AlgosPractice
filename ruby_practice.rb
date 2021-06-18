@@ -211,3 +211,27 @@ arr_2 = [
 ]
 
 # p multi_dimensional_sum(arr_2)    # => 24
+
+
+# p [1,2,3,55,1].select(&:odd?)
+
+
+
+def unique_paths(m, n)
+    
+	arr  = Array.new(m) { Array.new(n) }
+	
+	(0...m).each do |i|
+		(0...n).each do |j|
+			if (i == 0 || j == 0) 
+				arr[i][j] = 1
+			else
+				top = arr[i-1][j]
+				left = arr[i][j-1]
+				arr[i][j] = top+left
+			end
+		end
+	end
+
+	arr[m-1][n-1]
+end
