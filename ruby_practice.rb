@@ -68,8 +68,118 @@
 
 # say_bye
 
-if true
-    drink = "cortado"
+# if true
+#     drink = "cortado"
+# end
+
+# p drink
+
+# def bubbleSort(arr)
+#   sorted = false;
+#   while !sorted
+#     sorted = true
+
+#     (0...arr.length-1).each do |i|
+#       if arr[i] > arr[i+1]
+#         arr[i], arr[i+1] = arr[i+1], arr[i]
+#         sorted = false
+#       end
+#     end
+
+#   end
+#   p arr
+# end
+
+# bubbleSort([2,5,1,4,2,6,7,8,4])
+
+
+# num = 0
+
+# begin
+#   puts "dividing 10 by #{num}"
+#   ans = 10 / num
+#   puts "the answer is #{ans}"
+# rescue
+#   puts "There was an error with that division."
+# end
+
+# puts "--------"
+# puts "finished"
+
+
+# p "hello".instance_of?(String)  # => true
+# p 42.instance_of?(Integer)       # => false
+# p [42].instance_of?(Array)       # => false
+
+# p 'alex'.upcase!
+# p 'alex'.capitalize
+
+
+
+def adult_in_group?(arr)
+    arr.each do |ele|
+        return true if ele[:age] > 18
+    end
+
+    false
 end
 
-p drink
+people_1 = [
+    {name: "Jack", age: 17},
+    {name: "Jill", age: 21},
+    {name: "Alice", age: 15},
+    {name: "Bob", age: 16}
+]
+# p adult_in_group?(people_1)    # => true
+
+people_2 = [
+    {name: "Jane", age: 12},
+    {name: "John", age: 13},
+    {name: "Ashley", age: 10},
+    {name: "Bill", age: 16}
+]
+# p adult_in_group?(people_2)    # => false
+
+
+def only_vowels?(str)
+  vowels = ['a', 'e', 'o', 'u','i']
+  str.each_char do |c|
+    return false if !vowels.include?(c)
+      
+  end
+  true
+end
+# p only_vowels?("aaoeee")  # => true
+# p only_vowels?("iou")     # => true
+# p only_vowels?("cat")     # => false
+# p only_vowels?("over")    # => false
+
+def filter_lengths(arr, n=5)
+  res = []
+  arr.each do |el|
+    res.push(el) if el.length >= n;
+  end
+  res 
+end
+
+
+# p filter_lengths(["pear", "dragonfruit", "fig", "clementine"], 4)   # => ["pear", "dragonfruit", "clementine"]
+# p filter_lengths(["pear", "dragonfruit", "fig", "clementine"])      # => ["dragonfruit", "clementine"]
+# p filter_lengths(["cat", "dog", "capybara", "mouse"], 7)            # => ["capybara"]
+# p filter_lengths(["cat", "dog", "capybara", "mouse"])               # => ["capybara", "mouse"]
+
+
+def max_inject(*args)
+  # p args
+  args.inject do |acc, val|
+    if acc > val
+      acc 
+    else 
+      val
+    end 
+  end
+
+end
+
+# p max_inject(1, -4, 0, 7, 5)  # => 7
+# p max_inject(30, 28, 18)      # => 30
