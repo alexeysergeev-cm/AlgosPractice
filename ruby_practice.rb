@@ -183,3 +183,31 @@ end
 
 # p max_inject(1, -4, 0, 7, 5)  # => 7
 # p max_inject(30, 28, 18)      # => 30
+
+
+def union(*args)
+  args.inject([]) {|acc, val| acc + val}
+end
+
+# p union(["a", "b"], [1, 2, 3]) # => ["a", "b", 1, 2, 3]
+# p union(["x", "y"], [true, false], [20, 21, 23]) # => ["x", "y", true, false, 20, 21, 23]
+
+
+def multi_dimensional_sum(arr)
+  arr.flatten.sum
+end
+
+arr_1 = [
+    [4, 3, 1],
+    [8, 1],
+    [2]
+]
+
+# p multi_dimensional_sum(arr_1)    # => 19
+
+arr_2 = [
+    [ [3, 6], [7] ],
+    [ [5, 2], 1 ]
+]
+
+# p multi_dimensional_sum(arr_2)    # => 24
