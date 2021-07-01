@@ -873,3 +873,20 @@ var uniqueOccurrences = function(arr) {
     
     return res.length === new Set(res).size
 };
+
+
+//implement strStr()
+
+var strStr = function (haystack, needle) {
+    if (!needle.length) return 0;
+    if (!haystack.includes(needle[0])) return -1;
+
+    const len = needle.length;
+
+    for (let i = 0; i < haystack.length; i++) {
+        if (haystack[i] === needle[0]) {
+            if (haystack.slice(i, i + len) === needle) return i;
+        }
+    }
+    return -1;
+};
