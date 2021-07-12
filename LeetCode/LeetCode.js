@@ -910,3 +910,23 @@ var singleNumber = function(nums) {
     }
     return a;
 };
+
+
+
+///inorder Traversal of binary tree
+
+var inorderTraversal = function(root) {
+  if(!root) return [];
+  let result = []
+  
+  function dfs(node){
+    if(node !== null){
+      dfs(node.left)
+      result.push(node.val)
+      dfs(node.right)
+    }
+  }
+  
+  dfs(root)
+  return result;
+};
