@@ -930,3 +930,18 @@ var inorderTraversal = function(root) {
   dfs(root)
   return result;
 };
+
+
+
+///check if 2 trees are the same
+
+var isSameTree = function(p, q) {
+    
+    if(p === null && q === null) return true;
+    if(p === null || q === null) return false;
+    if(p.val !== q.val) return false;
+    
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right) 
+    
+    
+};
