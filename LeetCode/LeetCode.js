@@ -890,3 +890,23 @@ var strStr = function (haystack, needle) {
     }
     return -1;
 };
+
+
+
+/// using Bitwise XOR 
+/// problem : Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
+
+// Great solution, Bitwise XOR little trick to understand. But finally got it.
+// for example [4,1,2,1,2]
+// 4^1 = 4+1 =5
+// 5^2=5+2=7
+// 7^1= 7-1=6(because we already added 1, as per XOR logic it will subtract)
+// Similarly 6^2 = 6-2 =4 (because we already added 2, now we have to subtract it as per XOR operator)
+
+var singleNumber = function(nums) {
+    let a = 0;
+    for(const num of nums){
+      a ^= num;
+    }
+    return a;
+};
