@@ -945,3 +945,17 @@ var isSameTree = function(p, q) {
     
     
 };
+
+//dfs sum path
+var hasPathSum = function(root, targetSum, sum=0) {
+    if(!root) return false
+    
+    if(!root.left && !root.right ) {
+        return root.val + sum === targetSum
+    }
+    
+    let left = hasPathSum(root.left, targetSum, sum+root.val)
+    let right = hasPathSum(root.right, targetSum, sum+root.val)
+    
+    return left || right 
+};
