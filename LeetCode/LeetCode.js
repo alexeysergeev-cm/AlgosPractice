@@ -971,3 +971,19 @@ var maxDepth = function (root, depth = 1) {
 
     return Math.max(left, right);
 };
+
+
+//invert tree dfs
+ */
+var invertTree = function(root) {
+    if(!root) return null;
+    
+    
+    const left = invertTree(root.left);
+    const right = invertTree(root.right);
+
+    root.left = right;
+    root.right = left;
+    return root;
+    
+};
