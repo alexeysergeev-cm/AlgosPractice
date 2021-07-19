@@ -959,3 +959,15 @@ var hasPathSum = function(root, targetSum, sum=0) {
     
     return left || right 
 };
+
+
+//max depth
+
+var maxDepth = function (root, depth = 1) {
+    if (!root) return 0;
+
+    const left = maxDepth(root.left, depth + 1) || depth
+    const right = maxDepth(root.right, depth + 1) || depth
+
+    return Math.max(left, right);
+};
