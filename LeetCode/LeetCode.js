@@ -991,12 +991,42 @@ var invertTree = function(root) {
 
 ///symetric tree
 
-var isSymmetric = function(root) {
-  return isMirror(root, root);  
+var isSymmetric = function (root) {
+    return isMirror(root, root);
 };
 
-const isMirror = (node1, node2) =>{
-    if(!node1 && !node2) return true;
-    if(!node1 || !node2) return false;
+const isMirror = (node1, node2) => {
+    if (!node1 && !node2) return true;
+    if (!node1 || !node2) return false;
     return (node1.val === node2.val) && isMirror(node1.right, node2.left) && isMirror(node1.left, node2.right)
 }
+
+
+//total monay
+
+var totalMoney = function (n) {
+    // m,t,w,t,f,s,s,
+
+    //i = 0
+    // i< n
+    //sum = 0;
+    // sum++, i++
+    //start = 1;
+    //monday = 1;
+    //cursum = 0
+
+    let totalSum = 0;
+    let mondays = 1;
+    let deposit = 1;
+    let i = 1;
+    while (i <= n) {
+        totalSum += deposit;
+        deposit++
+        if (i % 7 === 0) {
+            mondays++;
+            deposit = mondays;
+        }
+        i++
+    }
+    return totalSum
+};
