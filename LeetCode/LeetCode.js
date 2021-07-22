@@ -1055,3 +1055,32 @@ var addTwoNumbers = function(l1, l2) {
     }
     return dummyHead.next;
 }
+
+//container with most water
+var maxArea = function(height) {
+    
+    let max = 0;
+    // for(let i = 0; i< height.length; i++){
+    //     for(let j = 0; j < height.length; j++) {
+    //         if(height[i] < height[j]){
+    //             continue;
+    //         }else{
+    //             const area = Math.abs(i-j) * height[j];
+    //             max = max > area ? max : area;
+    //         }
+    //     }
+    // }
+    // return max;
+    
+    let i = 0;
+    let j = height.length-1;
+    while(i < j){
+        max = Math.max(max, Math.min(height[i], height[j]) * (j-i));
+        if(height[i] < height[j]){
+            i++
+        } else {
+            j--;
+        }
+    }
+    return max;
+}
