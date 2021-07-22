@@ -1084,3 +1084,35 @@ var maxArea = function(height) {
     }
     return max;
 }
+
+
+/// three sum 
+var threeSum = function(nums) {      //    i  x     y
+    nums = nums.sort((a,b) => a-b); //[-4,-1,-1,0,1,2]
+    const res =[];
+    let seen = new Set()
+    for(let i = 0; i < nums.length; i++){
+        let x = i + 1;
+        let y = nums.length-1;
+        
+        while(x < y){
+            let sum = nums[i] + nums[x] + nums[y]
+            if(sum > 0) {
+                y--;
+            } else if (sum < 0) {
+                x++;
+            } else {
+                let triplet = [nums[i],nums[x],nums[y]];
+                if (seen.has(JSON.stringify(triplet))) {
+                    x++;
+                    continue;
+                }
+                seen.add(JSON.stringify(triplet));
+                res.push(triplet)
+                x++;
+            }
+        }
+        
+    }
+    return res
+};
