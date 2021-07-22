@@ -1030,3 +1030,28 @@ var totalMoney = function (n) {
     }
     return totalSum
 };
+
+///add two numbers 
+
+var addTwoNumbers = function(l1, l2) {
+    let p = l1;
+    let q = l2;
+    let dummyHead = new ListNode(0);
+    let cur = dummyHead;
+    let carry = 0;
+    
+    while(p || q){
+        let x = p ? p.val : 0;
+        let y = q ? q.val : 0;
+        let sum = carry + x + y;
+        carry = Math.floor(sum / 10);
+        cur.next = new ListNode(sum % 10);
+        cur = cur.next;
+        if(p) p = p.next;
+        if(q) q = q.next;
+    }  
+    if(carry > 0){
+        cur.next = new ListNode(carry)
+    }
+    return dummyHead.next;
+}
