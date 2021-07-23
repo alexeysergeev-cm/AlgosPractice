@@ -1161,3 +1161,55 @@ const dfs = (digits, letters, res, str, idx) => { //str =ad, idx = 2
         str = str.slice(0, str.length-1); //delete ae => a
     }
 }
+
+
+///max diff
+
+// function maxDiff(arr){
+//     const newArr = arr.slice().sort((a,b) => a-b);
+//     console.log(newArr)
+
+
+//     for(const num of newArr){
+
+//     }
+// }
+
+// console.log(maxDiff([2, 3, 10, 6, 4, 8, 1])) //=>8
+
+
+
+///remove nth node from end
+
+var removeNthFromEnd = function(head, n) {
+    if(!head.next) return null;
+    
+    //check the length of Linked List
+    let len = 1;
+    let cur = head
+    while(cur.next){
+        cur = cur.next
+        len++
+    }
+    
+    // identify the index of a node to delete
+    const idx = len-n;
+    
+    //keep track of previous node
+    let prev = null; 
+    let curN = head; 
+    let i = 0 
+    //iterate until find a node to delete
+    while(idx !== i){
+        prev = curN;
+        curN = curN.next
+        i++;
+    }
+    //edge case if node to delete happens to be the head;
+    let newHead;
+    // if prev is null, it means we deleting the head;
+    prev ? prev.next = curN.next : newHead = curN.next;
+    curN.next = null;
+    
+    return !newHead ? head : newHead;
+};
