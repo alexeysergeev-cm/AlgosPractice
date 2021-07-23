@@ -1119,6 +1119,11 @@ var threeSum = function(nums) {      //    i  x     y
 
 
 ///letter combo of a phone number
+//takeaways:
+// - can pass result arr into dfs
+// - start '' empty str and build it
+// - pass idx
+// - map letters
 
 var letterCombinations = function(digits) {
     if(!digits.length) return [];
