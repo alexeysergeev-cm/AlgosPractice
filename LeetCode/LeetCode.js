@@ -1213,3 +1213,31 @@ var removeNthFromEnd = function(head, n) {
     
     return !newHead ? head : newHead;
 };
+
+/// generate parenthesis
+
+var generateParenthesis = function(n) {
+    const res = []; // '((()))', '(()())', '(())()', '()(())', '()()()'
+    dfs(res, "", 0, 0, n);
+    return res;
+};
+
+const dfs = (res, str, open, close, max) => { // '()()()', open = 1, close = 1
+    if(str.length === max*2){
+        res.push(str);
+        return;
+    }
+    
+    if(open < max){
+        str += '('
+        dfs(res, str, open + 1, close, max);
+        str = str.slice(0, str.length-1); 
+    }
+    
+    if(close < open){
+        str += ')'
+        dfs(res, str, open, close + 1, max);
+        str = str.slice(0, str.length-1);
+    }
+    
+}
