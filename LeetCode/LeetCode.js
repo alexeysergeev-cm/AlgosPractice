@@ -1239,5 +1239,33 @@ const dfs = (res, str, open, close, max) => { // '()()()', open = 1, close = 1
         dfs(res, str, open, close + 1, max);
         str = str.slice(0, str.length-1);
     }
-    
 }
+
+
+///Merge k Sorted Lists
+
+var mergeKLists = function(lists) {
+    if(!lists.length) return null;
+    let merged = new ListNode();
+    
+    let vals = [];
+    let nodesAmount = lists.length;
+    let i = 0;
+    while(i < nodesAmount){
+        let cur = lists[i];
+        while(cur){
+            vals.push(cur.val);
+            cur = cur.next;
+        }
+        i++;
+    }
+    vals = vals.sort((a,b) => a-b);
+    let cur = merged;
+    for(const val of vals){
+        const newNode = new ListNode(val);
+        cur.next = newNode;
+        cur = cur.next;
+    }
+    
+    return merged.next;
+};
