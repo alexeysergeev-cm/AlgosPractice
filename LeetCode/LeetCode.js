@@ -1269,3 +1269,34 @@ var mergeKLists = function(lists) {
     
     return merged.next;
 };
+
+
+
+////Longest Valid Parentheses
+
+var longestValidParentheses = function (s) {
+    let res = 0;
+    for (let i = 0; i < s.length; i++) {
+        let stack = 0;
+        const curRes = dfs(s[i], s, stack, s.length, 0, i, 0);
+        res = curRes > res ? curRes : res
+    }
+    return res;
+};
+
+const dfs = (paren, s, stack, len, count, idx, final) => {
+    if (stack < 0) return final
+    if (!stack) final = count
+    if (idx === len) {
+        if (stack !== 0) {
+            return final
+        }
+        return count;
+    }
+
+    if (paren === '(') {
+        return dfs(s[idx + 1], s, stack + 1, len, count + 1, idx + 1, final);
+    } else {
+        return dfs(s[idx + 1], s, stack - 1, len, count + 1, idx + 1, final);
+    }
+}
