@@ -226,3 +226,31 @@ var colorBorder = function(grid, r0, c0, color) {
     
     return grid
 };
+
+
+
+///bracket combo
+
+function BracketCombinations(num) { 
+
+  // code goes here  
+  let res = [];
+  dfs(res, "", 0, 0, num);
+  return res.length;
+}
+
+const dfs = (res, str, open, close, max) => {
+  if(open === max && close === max){
+    res.push(str);
+    return;
+  }
+
+
+  if(open < max){
+    dfs(res, str+"(", open+1, close, max);
+  }
+
+  if(close < open){
+    dfs(res, str+")", open, close+1, max);
+  }
+}
