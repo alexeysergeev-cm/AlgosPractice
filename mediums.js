@@ -254,3 +254,43 @@ const dfs = (res, str, open, close, max) => {
     dfs(res, str+")", open, close+1, max);
   }
 }
+
+
+/// Find First and Last Position of Element in Sorted Array
+
+var searchRange = function(nums, target) {
+    if(nums.length === 1 && nums[0] === target) return [0,0]
+    
+    let res = []; //[, 3]
+    let i = 0;
+    let j = nums.length-1;
+    while(i < j){
+
+        if(nums[i] === target && nums[j] === target){
+            return [i, j];
+        }
+        
+        if (nums[i] < target){
+            i++;
+        }
+        
+        if (nums[j] > target){
+            j--;
+        }
+        
+        if (nums[i] === target){
+            if(!res[0]){
+                res[0] = i
+            }
+        }
+        
+        if (nums[j] === target){
+            if(!res[1]){
+                res[1] = j
+            }
+        }
+    }
+    res = res[0] === 0 || res[0] ? [i, i] : res[1] === 1 || res[1] ? [j, j] : [-1, -1];
+
+    return res;
+};
