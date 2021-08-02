@@ -294,3 +294,31 @@ var searchRange = function(nums, target) {
 
     return res;
 };
+
+
+/// combination sum
+
+var combinationSum = function (candidates, target) {
+  let res = [];
+
+  for (let i = 0; i < candidates.length; i++) {
+    let num = candidates[i];
+    dfs(res, candidates, i, [num], num, target);
+  }
+  return res;
+};
+
+const dfs = (res, arr, i, temp, cur, t) => {
+  if (cur > t) return;
+  if (cur === t) {
+    res.push(temp);
+    return;
+  }
+
+  while (i < arr.length) {
+    if (cur + arr[i] <= t) {
+      dfs(res, arr, i, temp.concat([arr[i]]), cur + arr[i], t)
+    }
+    i++
+  }
+}
