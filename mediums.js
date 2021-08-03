@@ -334,7 +334,6 @@ var permute = function (nums) {
 };
 
 const dfs = (res, nums, temp) => {
-
   if (!nums.length) {
     console.log(res, temp)
     res.push(temp.slice());
@@ -342,10 +341,9 @@ const dfs = (res, nums, temp) => {
   }
 
   for (let i = 0; i < nums.length; i++) {
-    let ele = nums.splice(i, 1); // remove
-    temp.push(...ele)
+    temp.push(nums[i]);
+    nums.splice(i, 1); // remove
     dfs(res, nums, temp);
-    nums.splice(i, 0, ...ele);
-    temp.pop();
+    nums.splice(i, 0, temp.pop()); // put back
   }
 }
