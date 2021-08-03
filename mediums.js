@@ -322,3 +322,30 @@ const dfs = (res, arr, i, temp, cur, t) => {
     i++
   }
 }
+
+
+///permutations
+
+var permute = function (nums) {
+  let res = [];
+  let temp = [];
+  dfs(res, nums, temp);
+  return res;
+};
+
+const dfs = (res, nums, temp) => {
+
+  if (!nums.length) {
+    console.log(res, temp)
+    res.push(temp.slice());
+    return;
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    let ele = nums.splice(i, 1); // remove
+    temp.push(...ele)
+    dfs(res, nums, temp);
+    nums.splice(i, 0, ...ele);
+    temp.pop();
+  }
+}
