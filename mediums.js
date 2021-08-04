@@ -428,3 +428,36 @@ const dfs = (subs, nums, cur) => {
         cur.pop()
     }
 }
+
+
+///set zeros in matrix
+var setZeroes = function(matrix) {
+  
+    let seen = new Set();
+    for(let i = 0; i < matrix.length; i++){
+        for(let j = 0; j < matrix[0].length; j++){
+            if(matrix[i][j] === 0 && !seen.has(`${i},${j}`)){
+                setRow(i, j, seen, matrix);
+                setCol(j, seen, matrix);
+            }
+        }
+    }
+};
+
+const setRow = (i, j, seen, matrix) => {
+    matrix[i].forEach((e,idx) => {
+        if(matrix[i][idx] !== 0){
+            matrix[i][idx] = 0;
+            seen.add(`${i},${idx}`)
+        }
+    })    
+}
+
+const setCol = (j, seen, matrix) => {
+    for(let i = 0; i < matrix.length; i++){
+        if(matrix[i][j] !== 0){
+            matrix[i][j] = 0;
+            seen.add(`${i},${j}`)
+        }
+    }
+}
