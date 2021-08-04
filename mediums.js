@@ -335,7 +335,6 @@ var permute = function (nums) {
 
 const dfs = (res, nums, temp) => {
   if (!nums.length) {
-    console.log(res, temp)
     res.push(temp.slice());
     return;
   }
@@ -347,3 +346,63 @@ const dfs = (res, nums, temp) => {
     nums.splice(i, 0, temp.pop()); // put back
   }
 }
+
+
+
+///check if sudoku board is valid
+
+var isValidSudoku = function(board) {
+    const row = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+    }
+    const col = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+    }
+    const box = {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+    }
+
+    for(let i = 0; i < board.length; i++){
+        for(let j = 0; j < board.length; j++){
+            let pos = board[i][j];            
+            
+            if(pos === ".") continue;
+            
+            if(row[i].includes(pos) || col[j].includes(pos)){
+                return false;
+            }
+            
+            row[i].push(pos);
+            col[j].push(pos);
+            
+            let idx = Math.floor(i/3) * 3 + Math.floor(j/3);
+            if (box[idx].includes(pos)) return false;
+            box[idx].push(pos);
+        }
+    }
+    return true;
+};
