@@ -406,3 +406,25 @@ var isValidSudoku = function(board) {
     }
     return true;
 };
+
+
+///subsets
+
+var subsets = function(nums) {
+    let subs = [];
+    let temp = []
+    dfs(subs, nums, temp);
+
+    return subs;
+};
+
+const dfs = (subs, nums, cur) => {
+    subs.push(cur.slice());
+    if(!nums.length) return;
+    
+    for(let i = 0; i < nums.length; i++){
+        cur.push(nums[i]);
+        dfs(subs, nums.slice(i+1), cur);
+        cur.pop()
+    }
+}
