@@ -576,3 +576,20 @@ var merge = function(intervals) {
     
     return res;
 };
+
+///dynamic programming Min path
+var minPathSum = function(grid) {
+     let m = grid.length
+    let n = grid[0].length
+    let dp = Array.from({length: m}, el => Array.from({length:n}, el => 0))
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+		    //get the min path sum to the current cell using our previously calculated values from the dp matrix -
+			//It will be the minimum of the cell above or to the left of current cell
+			//Also account for index out-of-bounds errors for first cell and first row and col
+            let minPrev = !j && !i ? 0 : Math.min((j ? dp[i][j - 1] : Number.MAX_SAFE_INTEGER), (i ? dp[i - 1][j] : Number.MAX_SAFE_INTEGER))
+            dp[i][j] = minPrev + grid[i][j] //add the previous min path sum to the current cell to get the new min path sum to this cell
+        }
+    }
+    return dp[m - 1][n - 1]
+}
