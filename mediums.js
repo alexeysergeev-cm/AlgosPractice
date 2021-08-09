@@ -239,21 +239,21 @@ function BracketCombinations(num) {
   return res.length;
 }
 
-const dfs = (res, str, open, close, max) => {
-  if(open === max && close === max){
-    res.push(str);
-    return;
-  }
+// const dfs = (res, str, open, close, max) => {
+//   if(open === max && close === max){
+//     res.push(str);
+//     return;
+//   }
 
 
-  if(open < max){
-    dfs(res, str+"(", open+1, close, max);
-  }
+//   if(open < max){
+//     dfs(res, str+"(", open+1, close, max);
+//   }
 
-  if(close < open){
-    dfs(res, str+")", open, close+1, max);
-  }
-}
+//   if(close < open){
+//     dfs(res, str+")", open, close+1, max);
+//   }
+// }
 
 
 /// Find First and Last Position of Element in Sorted Array
@@ -326,26 +326,26 @@ const dfs = (res, arr, i, temp, cur, t) => {
 
 ///permutations
 
-var permute = function (nums) {
-  let res = [];
-  let temp = [];
-  dfs(res, nums, temp);
-  return res;
-};
+// var permute = function (nums) {
+//   let res = [];
+//   let temp = [];
+//   dfs(res, nums, temp);
+//   return res;
+// };
 
-const dfs = (res, nums, temp) => {
-  if (!nums.length) {
-    res.push(temp.slice());
-    return;
-  }
+// const dfs = (res, nums, temp) => {
+//   if (!nums.length) {
+//     res.push(temp.slice());
+//     return;
+//   }
 
-  for (let i = 0; i < nums.length; i++) {
-    temp.push(nums[i]);
-    nums.splice(i, 1); // remove
-    dfs(res, nums, temp);
-    nums.splice(i, 0, temp.pop()); // put back
-  }
-}
+//   for (let i = 0; i < nums.length; i++) {
+//     temp.push(nums[i]);
+//     nums.splice(i, 1); // remove
+//     dfs(res, nums, temp);
+//     nums.splice(i, 0, temp.pop()); // put back
+//   }
+// }
 
 
 
@@ -418,16 +418,16 @@ var subsets = function(nums) {
     return subs;
 };
 
-const dfs = (subs, nums, cur) => {
-    subs.push(cur.slice());
-    if(!nums.length) return;
+// const dfs = (subs, nums, cur) => {
+//     subs.push(cur.slice());
+//     if(!nums.length) return;
     
-    for(let i = 0; i < nums.length; i++){
-        cur.push(nums[i]);
-        dfs(subs, nums.slice(i+1), cur);
-        cur.pop()
-    }
-}
+//     for(let i = 0; i < nums.length; i++){
+//         cur.push(nums[i]);
+//         dfs(subs, nums.slice(i+1), cur);
+//         cur.pop()
+//     }
+// }
 
 
 ///set zeros in matrix
@@ -461,3 +461,118 @@ const setCol = (j, seen, matrix) => {
         }
     }
 }
+
+
+//hotel construction
+//n = 7
+//n-1 = 6 roads
+//roads = [[1,2],[2,5],[3,4],[4,5],[5,6],[7,6]];
+//return Number of ways to build 3 hotels under the conditions:
+//1. so such the distance between every pair of hotels is equal!
+
+//e.g [[1,2],[1,3],[1,4],[1,5]]
+//                1
+//             / / \ \
+//           2  3  4  5
+// there are 4 ways:
+// 1. build in 2,3,4
+// 2. build in 2,3,5
+// 3. build in 2,4,5
+// 4. build in 3,4,5
+
+//return: 4 
+
+
+const buildHotels = (roads) => {
+  const distances = {};
+  for(let i = 0; i <roads.length; i++){
+    let road = roads[i];
+    if(!distances[road[0]]){
+      distances[road[0]] = {}
+    }
+    if(!distances[road[1]]){
+      distances[road[1]] = {}
+    }
+    distances[road[1]][road[0]] = 1;
+    distances[road[0]][road[1]] = 1;
+  }
+  console.log(distances);
+
+  //traverse ?
+  let cur = [];
+  let len = 0;
+  for(let i = 2; i < roads.length+2; i++){
+    let k = i+1;
+    if(!distances[roads[i]][k]){
+      for(const dist of distances[road[i]]){
+        let keys = Object.keys(distances[road[i]]);
+        let cnt = traverse(distances,keys,cur, k, 0);
+        console.log(cnt);
+      }
+
+    }
+  }
+}
+
+const traverse = (obj, keys, cur, tk, count) => {
+  if(obj[cur][tk]){
+    return ++count;
+  }
+  for(let i =0; i < keys.length; i++){
+    traverse(obj, keys.slice(1), cur, tk, count)
+  }
+}
+// console.log(buildHotels([[1,2],[1,3],[1,4],[1,5]])); // => 4
+
+
+/// merge intervals
+
+var merge = function(intervals) {
+    
+    // sort by the start of the interval in asc;
+    intervals = intervals.sort((a,b) => a[0]-b[0]);
+    
+    let res = [];
+    
+    // here we track the range of current interval; 
+    let min = null;
+    let max = null;
+    
+    // store current interval;
+    let cur = []
+    for(let i = 0; i < intervals.length; i++){
+        
+        // basically reassign min and max when i === 0; 
+        if (min === null && max === null){
+            min = intervals[i][0];
+            max = intervals[i][1];
+            cur = [min, max];
+            
+        // here we know that we have min and max, now we look if it falls into the range;             
+        } else {
+            
+            // if is in range, reassign max if necessary;
+            if(intervals[i][0] >= min && intervals[i][0] <= max){
+                max = intervals[i][1] > max ? intervals[i][1] : max;
+                cur[1] = max;
+                
+            // else if it is not in range, we know its the begining of new interval;
+            // we push current interval into the result and do proper reassignment;
+            } else {
+                res.push(cur);
+                min = intervals[i][0];
+                max = intervals[i][1];
+                cur = [min, max];
+            }
+        }
+        
+        // sometime we modify cur and dont push it in the code above,
+        // so we have to check if we are looking at the last element of intervals; 
+        if(i === intervals.length-1){
+            res.push(cur);
+        }
+    }
+    
+    
+    return res;
+};
