@@ -598,27 +598,26 @@ var minPathSum = function(grid) {
 ///product defects 
 
 const defects = (matrix) => {
-  let track = new Array(matrix[0].length).fill(0);
+  let track = new Array(matrix.length).fill(0).map(e => new Array(matrix[0].length).fill(0));
 
   let maxArea = 0;
-  let cur = false;
+  
   for(let i = 0; i < matrix.length; i++){
     for(let j = 0; j < matrix[0].length; j++){
-      let ele = matrix[i][j];
 
-      if(ele){
-        cur = true;
-        track[j]++;
+      if(i === 0 || j === 0){
+        track[i][j] = matrix[i][j];
       } else {
-        track[j] = 0;
+        let min = Math.min(track[i-1][j], track[i-1][j-1], track[i][j-1]);
+        track[i][j] = min + matrix[i][j];
       }
 
-      if(i > 0 && j > 0 && j === i){
-        maxArea = i+1;
+      if (track[i][j] > maxArea){
+        maxArea = track[i][j];
       }
-      console.log(track);
     }
   }
+  console.log(track)
   return maxArea;
 
 
@@ -627,3 +626,4 @@ const defects = (matrix) => {
 
 
 console.log(defects([[1,1,1],[1,1,0]]));
+console.log(defects([[1,1,1,1,1],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,1,1]]));
