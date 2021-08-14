@@ -627,3 +627,20 @@ const defects = (matrix) => {
 
 console.log(defects([[1,1,1],[1,1,0]]));
 console.log(defects([[1,1,1,1,1],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,1,1]]));
+
+
+
+///sort Colors
+
+var sortColors = function(nums) {
+    
+    for (let i = 0; i < nums.length; i++){
+        let j = nums.length-1;
+        while (j > i){
+            if (nums[i] > nums[j]){
+                [nums[i], nums[j]] = [nums[j], nums[i]];
+            }
+            j--;
+        }
+    }
+};
