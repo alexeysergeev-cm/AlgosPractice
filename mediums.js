@@ -644,3 +644,53 @@ var sortColors = function(nums) {
         }
     }
 };
+
+
+
+// get permutation
+
+var getPermutation = function(n, k) {
+    // assign res
+    // return string
+    // do backtracking recursion
+    // i = 1, i === k when push last one and return
+    
+    //create str 
+    let i = 1;
+    let str = ""
+    while(i <= n){
+        str += `${i}`;
+        i++;
+    }
+    
+    if (k === 1) return  str;
+    
+    let nums = str.split("");
+    let res = [];
+    
+    build(nums, res, "", k);
+    
+    return res.pop();
+};
+
+const build = (nums, result, word, k) => {
+    if (result.length === k) return;
+    if (!nums.length){
+        result.push(word);
+        return;
+    }
+    
+    for (let i = 0; i < nums.length; i++){
+        let ele = nums[i];
+        
+        //remove ele at i;
+        nums.splice(i, 1);
+
+        build(nums, result, word += ele, k);
+        
+        //backrack;
+        //insert ele at i 
+        nums.splice(i, 0, ele);
+        word = word.slice(0, word.length-1)
+    }
+}
