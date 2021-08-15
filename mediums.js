@@ -694,3 +694,35 @@ const build = (nums, result, word, k) => {
         word = word.slice(0, word.length-1)
     }
 }
+
+/// num of islands
+
+var numIslands = function(grid) {
+    let res = 0;
+    
+    for (let i = 0; i < grid.length; i++){
+        for (let j = 0; j < grid[0].length; j++){
+            if (grid[i][j] === '1'){
+                res++;
+                traverse(grid, i, j);
+            }
+        }
+    }
+    
+    return res
+};
+
+const traverse = (grid, x, y) => {
+    if (grid[x][y] === '1') {
+        grid[x][y] = '.'
+        
+        let dirs = [[-1,0],[1,0],[0,-1],[0,1]];
+        
+        for (const dir of dirs){
+            if (grid[x+dir[0]]) traverse(grid, x + dir[0], y + dir[1]);
+        }
+        
+    } else {
+        return;
+    }
+}
