@@ -726,3 +726,44 @@ const traverse = (grid, x, y) => {
         return;
     }
 }
+
+
+
+/// max area island
+
+var maxAreaOfIsland = function(grid) {
+    let res = 0;
+    let temp = [];
+    for (let i = 0; i < grid.length; i++){
+        for (let j = 0; j < grid[0].length; j++){
+            if (grid[i][j] === 1){
+                traverse(grid, i, j, temp);
+
+                if (temp.length > res) {
+                    res = temp.length;
+                }
+                temp = [];
+            }
+        }
+    }
+    return res;
+};
+
+
+const traverse = (grid, x, y, cur) => {
+    
+    if (grid[x][y] === 1){
+        grid[x][y] = '.';
+        cur.push(1);
+        
+        const dirs = [[-1,0],[1,0],[0,1],[0,-1]];
+        for (const dir of dirs){
+            if (grid[x + dir[0]]){
+                traverse(grid, x + dir[0], y + dir[1], cur);
+            }
+        }
+        
+    } else {
+        return;
+    }
+}
