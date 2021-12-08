@@ -59,3 +59,10 @@ pass_block {puts 'Hello, block'}
 
 p 4.class.superclass.superclass.superclass.superclass
 p 4.class.class.superclass
+
+
+a = []
+(0...16).each {|i| a << i}
+a.each {|i| (a[i-3]...i).each {|i| p i} if i % 3 == 0 }
+
+a.each {|i| p a.slice(i, i+4) if i % 4 == 0 }
