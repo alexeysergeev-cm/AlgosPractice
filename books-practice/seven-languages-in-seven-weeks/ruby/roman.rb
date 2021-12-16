@@ -67,13 +67,7 @@ def calculate_double_digit(build_roman, number, hash_map)
         build_roman += hash_map[10]
       end
     end
-    if hash_map[left]
-      build_roman += hash_map[left] 
-    else 
-      left.times do |i|
-        build_roman += hash_map[1]
-      end
-    end
+    build_roman = calculate_single_digit(build_roman, left, hash_map)
   elsif number > 50
     build_roman += hash_map[50]
     range = (number - 50) / 10
@@ -86,7 +80,10 @@ def calculate_double_digit(build_roman, number, hash_map)
 end
 
 def calculate_tripple_digit(build_roman, number, hash_map)
-  build_roman += hash_map[((number / 100).to_s + "00").to_i]
+  iterator = number / 100
+  iterator.times do |i|
+    build_roman += hash_map[100]
+  end
   left = (number.to_s.slice(1..-1)).to_i
   build_roman = calculate_double_digit(build_roman, left, hash_map)
   build_roman
@@ -125,3 +122,4 @@ puts convert_to_roman(77) #=> LXXVII
 puts convert_to_roman(100) #=> C
 puts convert_to_roman(123) #=> CXXIII
 puts convert_to_roman(155) #=> CLV
+puts convert_to_roman(327) #=> CCCXXVII
