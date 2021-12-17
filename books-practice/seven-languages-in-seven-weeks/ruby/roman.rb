@@ -20,10 +20,12 @@ end
 # puts Roman.IX
 # puts Roman.G
 
+
+# Having input number output the Roman number
+# 8 => VIII
+
 def get_digits num
-  str_num = num.to_s
-  digit_count = str_num.length
-  digit_count
+  num.to_s.length
 end
 
 def create_roman_map
@@ -40,51 +42,51 @@ def create_roman_map
   hash_map
 end
 
+def singles(num, map, multiplier)
+  str = ""
+  num.times do |i|
+    str += map[multiplier]
+  end
+  str
+end
+
 def calculate_single_digit(build_roman, number, hash_map)
   return build_roman += hash_map[number] if hash_map[number]
   if number < 4 
-    number.times do |i|
-      build_roman += hash_map[1]
-    end
+    build_roman += singles(number, hash_map, 1)
   elsif number > 5
     build_roman += hash_map[5]
     range = number - 5 
-    range.times do |i|
-      build_roman += hash_map[1]
-    end
+    build_roman += singles(range, hash_map, 1)
   end
   build_roman
 end
 
 def calculate_double_digit(build_roman, number, hash_map)
-  range = ((number / 10).to_s + "0").to_i
+  return build_roman += hash_map[number] if hash_map[number]
+  range = number / 10
   left = number % 10
   if number < 50 
-    if hash_map[range]
-      build_roman += hash_map[range] 
+    if hash_map[range * 10]
+      build_roman += hash_map[range * 10] 
     else 
-      (range / 10).times do |i|
-        build_roman += hash_map[10]
-      end
+      build_roman += singles(range, hash_map, 10)
     end
     build_roman = calculate_single_digit(build_roman, left, hash_map)
   elsif number > 50
     build_roman += hash_map[50]
     range = (number - 50) / 10
-    range.times do |i|
-      build_roman += hash_map[10]
-    end
+    build_roman += singles(range, hash_map, 10)
     build_roman = calculate_single_digit(build_roman, left, hash_map)
   end
   build_roman
 end
 
 def calculate_tripple_digit(build_roman, number, hash_map)
+  return build_roman += hash_map[number] if hash_map[number]
   iterator = number / 100
-  iterator.times do |i|
-    build_roman += hash_map[100]
-  end
-  left = (number.to_s.slice(1..-1)).to_i
+  left = number % 100
+  build_roman += singles(iterator, hash_map, 100)
   build_roman = calculate_double_digit(build_roman, left, hash_map)
   build_roman
 end
@@ -92,17 +94,14 @@ end
 def convert_to_roman(number)
   return '' if number == 0
   hash_map = create_roman_map
-  digit_count = get_digits number
+  digit_count = get_digits(number)
 
   build_roman = "";
   if digit_count == 1
-    return hash_map[number] if hash_map[number]
     build_roman = calculate_single_digit(build_roman, number, hash_map)
   elsif digit_count == 2 
-    return hash_map[number] if hash_map[number]
     build_roman = calculate_double_digit(build_roman, number, hash_map)
   elsif digit_count == 3
-    return hash_map[number] if hash_map[number]
     build_roman = calculate_tripple_digit(build_roman, number, hash_map)
   end
 
@@ -123,3 +122,4 @@ puts convert_to_roman(100) #=> C
 puts convert_to_roman(123) #=> CXXIII
 puts convert_to_roman(155) #=> CLV
 puts convert_to_roman(327) #=> CCCXXVII
+puts convert_to_roman(159) #=> CLIX
