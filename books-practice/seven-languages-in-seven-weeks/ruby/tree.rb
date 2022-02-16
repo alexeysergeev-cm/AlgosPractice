@@ -1,3 +1,4 @@
+require 'byebug'
 class Tree
   attr_accessor :children, :node_name
 
@@ -25,6 +26,7 @@ puts
 puts 'Visiting all nodes'
 ruby_tree.visit_all {|node| puts node.node_name}
 
+puts
 puts "Tree2 ---"
 puts 
 
@@ -35,21 +37,35 @@ class Tree2
     @family = family
   end
 
+  def build_tree(node)
+    # modify tree 1 class and use that
+  end
+
   def visit_all(&block)
     visit &block
-    family.each {|k,v| v.visit_all &block}
+    family.each do |k,val| 
+      val.each do |k2,val2|
+        hash = {}
+        hash[k2] = val2
+        Tree2.new(hash).visit_all &block
+      end
+    end
   end
 
   def visit(&block)
-    block.call self
+    block.call family
   end
 end
 
 ruby_tree2 = Tree2.new({'grandpa' => {'dad' => {'child1' => {}, 'child 2' => {}}, 'uncle' => {'child 3' => {}, 'child 4' => {}}}})
 
 puts 'Visiting a node'
-ruby_tree2.visit {|k,v| puts k}
-puts
 
-# puts 'Visiting all nodes'
-# ruby_tree2.visit_all {|k,v| puts k}
+ruby_tree2.visit do |node| 
+  puts node.keys.first
+end
+
+puts 'Visiting all nodes'
+ruby_tree2.visit_all do |node| 
+  puts node.keys.first if node.keys && node.keys.length
+end
