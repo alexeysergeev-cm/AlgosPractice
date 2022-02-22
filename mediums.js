@@ -496,7 +496,7 @@ const buildHotels = (roads) => {
     distances[road[1]][road[0]] = 1;
     distances[road[0]][road[1]] = 1;
   }
-  console.log(distances);
+//   console.log(distances);
 
   //traverse ?
   let cur = [];
@@ -507,7 +507,7 @@ const buildHotels = (roads) => {
       for(const dist of distances[road[i]]){
         let keys = Object.keys(distances[road[i]]);
         let cnt = traverse(distances,keys,cur, k, 0);
-        console.log(cnt);
+        // console.log(cnt);
       }
 
     }
@@ -617,7 +617,7 @@ const defects = (matrix) => {
       }
     }
   }
-  console.log(track)
+//   console.log(track)
   return maxArea;
 
 
@@ -625,8 +625,8 @@ const defects = (matrix) => {
 
 
 
-console.log(defects([[1,1,1],[1,1,0]]));
-console.log(defects([[1,1,1,1,1],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,1,1]]));
+// console.log(defects([[1,1,1],[1,1,0]]));
+// console.log(defects([[1,1,1,1,1],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,0,0],[1,1,1,1,1]]));
 
 
 
@@ -712,20 +712,20 @@ var numIslands = function(grid) {
     return res
 };
 
-const traverse = (grid, x, y) => {
-    if (grid[x][y] === '1') {
-        grid[x][y] = '.'
+// const traverse = (grid, x, y) => {
+//     if (grid[x][y] === '1') {
+//         grid[x][y] = '.'
         
-        let dirs = [[-1,0],[1,0],[0,-1],[0,1]];
+//         let dirs = [[-1,0],[1,0],[0,-1],[0,1]];
         
-        for (const dir of dirs){
-            if (grid[x+dir[0]]) traverse(grid, x + dir[0], y + dir[1]);
-        }
+//         for (const dir of dirs){
+//             if (grid[x+dir[0]]) traverse(grid, x + dir[0], y + dir[1]);
+//         }
         
-    } else {
-        return;
-    }
-}
+//     } else {
+//         return;
+//     }
+// }
 
 
 
@@ -750,20 +750,50 @@ var maxAreaOfIsland = function(grid) {
 };
 
 
-const traverse = (grid, x, y, cur) => {
+// const traverse = (grid, x, y, cur) => {
     
-    if (grid[x][y] === 1){
-        grid[x][y] = '.';
-        cur.push(1);
+//     if (grid[x][y] === 1){
+//         grid[x][y] = '.';
+//         cur.push(1);
         
-        const dirs = [[-1,0],[1,0],[0,1],[0,-1]];
-        for (const dir of dirs){
-            if (grid[x + dir[0]]){
-                traverse(grid, x + dir[0], y + dir[1], cur);
-            }
-        }
+//         const dirs = [[-1,0],[1,0],[0,1],[0,-1]];
+//         for (const dir of dirs){
+//             if (grid[x + dir[0]]){
+//                 traverse(grid, x + dir[0], y + dir[1], cur);
+//             }
+//         }
         
-    } else {
-        return;
+//     } else {
+//         return;
+//     }
+// }
+
+
+/// hackerrank
+
+const maxSubArrayValue = (arr, memo={}) => {
+    maxHelper(arr, memo);
+    
+    let max = 0;
+    for(let key in memo){
+        let cur = Math.abs(memo[key]);
+        if (cur > max) max = cur;
     }
+
+    return max ** 2;
 }
+
+const maxHelper = (arr, memo={}) => {
+    if (!arr.length) return 0;
+
+    if (!memo[arr]) {
+        memo[arr] = arr[0] - maxHelper(arr.slice(1), memo);
+    }
+
+    return memo[arr]
+}
+
+// console.log(maxSubArrayValue([2,-1,-4,5])); // 81
+// console.log(maxSubArrayValue([-1,-4,2])); // 36
+// console.log(maxSubArrayValue([-1])); // 1
+// console.log(maxSubArrayValue([])); // 0
