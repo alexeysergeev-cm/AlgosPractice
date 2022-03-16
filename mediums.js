@@ -847,7 +847,7 @@ var removeOuterParentheses = function(s) {
     return outer
 };
 
-console.log(removeOuterParentheses("(()())(())")); // ()()()
+// console.log(removeOuterParentheses("(()())(())")); // ()()()
 
 /*
     res = "()()()"
@@ -856,5 +856,131 @@ console.log(removeOuterParentheses("(()())(())")); // ()()()
               i 
     "(()())(())"
 */
+
+
+///drone planner
+
+function calcDroneMinEnergy(route) {
+  // your code goes here
+  let res = 0;
+  let curEnergy = 0; // 1
+  let curHeight = 0; // 6
+  
+  let points = route.map(arr => arr[2]) // => [10,0,6,15,8]
+  
+  for(let i = 0; i < points.length; i++) {
+    if (i === 0) {
+      curHeight = points[i]
+    } else {
+      let nextHeight = points[i]  // 6
+      let cost = curHeight - nextHeight; // 3
+      let remainingEnergy = curEnergy + cost;
+      
+      if (remainingEnergy >= 0) {
+        curEnergy = remainingEnergy;
+        curHeight = nextHeight
+      } else {
+        return Math.abs(remainingEnergy)
+      }
+    }
+  }
+  
+  return res;
+}
+
+/*
+        z
+        |
+        |
+        | 
+          ------- y
+       /
+      /  
+     x  
+*/
+
+/// shifted binary search
+
+const findPivotPoint_2 = (arr) => {
+    let l = 0
+    let r = arr.length - 1
+
+    while (l <= r){
+        let mid = Math.floor((r + l)/2) //3
+
+        if (mid === 0 || arr[mid] < arr[mid-1]) {
+            return mid
+        } else  if (arr[mid] > arr[0]){
+            l = mid + 1
+        } else {
+            r = mid - 1
+        }
+    }
+
+    return 0
+}
+/*
+mid                 m
+l                   i
+        [9, 12, 17, 2, 4, 5]
+r                   j     
+
+mid = i + (j - i)/2  = 2
+*/
+
+// console.log(findPivotPoint_2([9, 12, 17, 2, 4, 5]))
+
+
+//shifted arr;
+
+function shiftedArrSearch(shiftArr, num) {
+  let pivotIdx = findPivotPoint(shiftArr); 
+ 
+  if (pivotIdx === 0 || num < shiftArr[0]) {
+    return bs(shiftArr.slice(pivotIdx, shiftArr.length), num) + pivotIdx
+  }
+  
+  return bs(shiftArr.slice(0, pivotIdx), num)
+}
+
+const findPivotPoint = (arr) => {
+    let l = 0
+    let r = arr.length - 1
+
+    while (l <= r){
+        let mid = Math.floor((r + l)/2) //3
+
+        if (mid === 0 || arr[mid] < arr[mid-1]) {
+            return mid
+        } else  if (arr[mid] > arr[0]){
+            l = mid + 1
+        } else {
+            r = mid - 1
+        }
+    }
+    return 0
+}
+
+
+function bs(arr, t) { 
+  if (!arr.length) return -1;
+  
+  let midIdx = Math.floor(arr.length/2);
+  
+  if (arr[midIdx] === t) return midIdx;
+  
+  if (t < arr[midIdx]) {
+    return bs(arr.slice(0, midIdx), t)
+  } else {
+    let res = bs(arr.slice(midIdx+1), t); 
+    return res === -1 ? -1 : midIdx + res + 1 
+  }
+  
+}
+
+console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 2)) // 3
+console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 4)) // 4
+console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)) // 2
+console.log(shiftedArrSearch([1,2,3,4,5,0], 0)) // 5
 
 
