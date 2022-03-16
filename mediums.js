@@ -770,7 +770,6 @@ var maxAreaOfIsland = function(grid) {
 
 
 /// hackerrank
-
 const maxSubArrayValue = (arr, memo={}) => {
     maxHelper(arr, memo);
     
@@ -797,3 +796,65 @@ const maxHelper = (arr, memo={}) => {
 // console.log(maxSubArrayValue([-1,-4,2])); // 36
 // console.log(maxSubArrayValue([-1])); // 1
 // console.log(maxSubArrayValue([])); // 0
+
+
+// idea is only start iterating from the bottom of the sequence => O(n)
+var longestConsecutive = function(nums) {
+    let max = 0;
+    let map = {}
+    for(let num of nums) {
+        map[num] = true;
+    }
+
+    for(let num of nums) {
+        let longest = 1;
+        let cur = num;
+        
+        if (!map[num - 1]) {
+            while(map[cur + 1]) {
+                longest++;
+                cur = cur+1;
+            }
+        }
+        
+        max = Math.max(max, longest) 
+    }
+
+    return max;
+};
+
+
+
+// console.log(longestConsecutive([10,5,12,3,55,30,4,11,2])); // 4
+// console.log(longestConsecutive([19,13,15,12,18,14,17,11])); // 5 coz 11-12-13-14-15
+// console.log(longestConsecutive([0,-1])); // 2 
+
+
+var removeOuterParentheses = function(s) {
+    let count = 0, outer = ""
+
+    for(let i = 0 ; i < s.length; i++) {
+        if(s[i] === "(") {
+            count++
+        }
+        if(count > 1) {
+            outer += s[i]
+        }
+        if(s[i] === ")") {
+            count--
+        }
+    }
+    return outer
+};
+
+console.log(removeOuterParentheses("(()())(())")); // ()()()
+
+/*
+    res = "()()()"
+    count = 0
+
+              i 
+    "(()())(())"
+*/
+
+
