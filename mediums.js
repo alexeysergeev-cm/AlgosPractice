@@ -929,6 +929,7 @@ mid = i + (j - i)/2  = 2
 */
 
 // console.log(findPivotPoint_2([9, 12, 17, 2, 4, 5]))
+// console.log(findPivotPoint_2([3,1]))
 
 
 //shifted arr;
@@ -943,22 +944,28 @@ function shiftedArrSearch(shiftArr, num) {
   return bs(shiftArr.slice(0, pivotIdx), num)
 }
 
+//[3,1] => 0
+
+// m
+//[1,3] => -1
 const findPivotPoint = (arr) => {
     let l = 0
     let r = arr.length - 1
 
     while (l <= r){
-        let mid = Math.floor((r + l)/2) //3
+        let mid = Math.floor((r + l)/2)         // 0
 
-        if (mid === 0 || arr[mid] < arr[mid-1]) {
+        if (mid < r && arr[mid] > arr[mid+1]) { // 0 < 1 
             return mid
-        } else  if (arr[mid] > arr[0]){
-            l = mid + 1
+        } else if (mid > l && arr[mid] < arr[mid+1]){   // 0 > 0
+            return (mid - 1);
+        } else if (arr[l] >= arr[mid] ){  
+            r = mid - 1                                  // 0 < 1 
         } else {
-            r = mid - 1
+            l = mid + 1
         }
     }
-    return 0
+    return -1
 }
 
 
@@ -978,9 +985,141 @@ function bs(arr, t) {
   
 }
 
-console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 2)) // 3
-console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 4)) // 4
-console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)) // 2
-console.log(shiftedArrSearch([1,2,3,4,5,0], 0)) // 5
+// console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 2)) // 3
+// console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 4)) // 4
+// console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)) // 2
+// console.log(shiftedArrSearch([1,2,3,4,5,0], 0)) // 5
 
 
+function findPivot( arr, low, high){
+    // base cases
+    if (high < low)
+        return -1;
+    if (high == low)
+        return low;
+ 
+    let mid = Math.floor((low + high) / 2); /*low + (high - low)/2;*/
+    if (mid < high && arr[mid] > arr[mid + 1])
+        return mid;
+ 
+    if (mid > low && arr[mid] < arr[mid - 1])
+        return (mid - 1);
+ 
+    if (arr[low] >= arr[mid])
+        return findPivot(arr, low, mid - 1);
+ 
+    return findPivot(arr, mid + 1, high);
+}
+
+// console.log(findPivot([1,3], 0, 1))
+// console.log(findPivot([3,1], 0, 1))
+// console.log(findPivotPoint([1,3], 0, 1))
+// console.log(findPivotPoint([3,1], 0, 1))
+
+
+/* 
+  S-1-2    2: [[0,4], [2,4]]
+  --WWW
+  WWW-2
+  ---E-
+  1----
+  
+S----
+-----
+-----
+-----
+----E
+
+
+  dfs(
+    dfs-right
+    dfs-down
+    dfs-left
+    dfs-up
+  )
+  
+  
+
+
+
+mentioning edge cases earlier would be a good idea (i.e. what happens if you cant reach the end?)
+mentioning are diagonals are okay would be good too
+
+bfs vs dfs and when to use it
+
+a lil fuziness with time complexity but you got it eventually
+
+mentioning edge cases is great, gj! only missed if it's impossible to reach the end
+
+naming your functions to be more explicit might be a nice touch, (a bfs should be named BFS in terms of best practices since other engineers will immediately recognize it if named well)
+
+
+can you inline currX, currY, curNumofSteps
+
+queue vs q, cur vs current
+
+defining the funciton so it can support any S by default, didn't ask if diagonals count
+
+
+as a nit, the string conversion for handling the set is probs not ideal. making a copy of the array would be better
+
+x and y vs. startX and startY
+
+defining constants in the function vs. outside of the function
+
+clear language mastery which is great
+
+in-line if statements aren't recommended and most linters catch it, prefer if () {
+
+}
+
+forgot to add the initial S into your visited set
+
+coding pace is a lil slow, didn't get to the teleporters in time
+
+pulling out constants is a best-practice as wel
+
+pulling out stuff into functions allows you to name what you're checking (instead of nextX >= 0... you could have a function called inBounds)
+
+didn't ask if taking a teleporter counts as a step
+
+
+
+
+  res = 8
+*/
+
+const ENDING_VALUE = 'E'
+const VALID_DIRECTIONS = [[0,-1],[0,1], [1,0],[-1,0]];
+
+function bfsMatrixTraversal(matrix, x, y, teleporterMap) {
+    const q = [[x,y,0]];
+  
+    while(q.length) {
+        let shift = q.shift(); 
+        let curX = shift[0]
+        let curY = shift[1]
+        let curNumOfStep = shift[2]
+        
+        matrix[curX][curY] = "V"
+
+        if (matrix[curX][curY] === ENDING_VALUE) {
+            return curNumOfStep;  
+        }
+    
+        for(let dir of VALID_DIRECTIONS) {
+            let nextX = curX + dir[0]
+            let nextY = curY + dir[1]
+        
+            if (isInBounds(nextX, nextY, matrix) && !matrix[nextX][nextY] === "W" && !matrix[nextX][nextY] === "V") {
+                q.push([nextX, nextY, curNumOfStep+1])
+            }  
+        }
+    }
+
+  return -1;
+}
+
+function isInBounds(x, y, matrix) {
+  return x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length 
+}
