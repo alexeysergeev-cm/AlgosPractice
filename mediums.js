@@ -1269,3 +1269,31 @@ function isToeplitz(arr) {
   
   return true;
 }
+
+
+///dynamic programming DP
+
+var longestPalindromeSubseq = function(s) {
+    
+    let table = Array(s.length).fill(0).map(e => Array(s.length).fill(0))
+    let l = 1;
+    
+    for(let i = 0; i < s.length; i++) {
+        table[i][i] = 1;
+    }
+
+    for(let l = 2; l<= s.length;l++) {
+        for(let i = 0; i< s.length - l + 1;i++){
+            let j = i+l-1
+            if (l === 2 && s[i] === s[j]) {
+                table[i][j] = 2;
+            } else if (s[i] === s[j]) {
+                table[i][j] = 2 + table[i+1][j-1];    
+            } else {
+                table[i][j] = Math.max(table[i+1][j], table[i][j-1]);    
+            }
+        }
+    }
+    console.log(table)
+    return table[0][s.length-1]
+};
