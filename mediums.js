@@ -1240,3 +1240,32 @@ function binarySearch(arr, target) {
 }
 
 
+function isToeplitz(arr) {
+  let firstRow = arr[0];
+
+  for(let i = 0; i < firstRow.length; i++) {
+      let curNum = firstRow[i]; 
+      let row = 0
+      let col = i 
+      
+      while(arr[row] && arr[row][col] !== undefined ) {  
+          if (arr[row][col] !== curNum) return false;
+          row++;  
+          col++;  
+      }
+  }
+  
+  for(let i = 1; i < arr.length; i++) {
+      let curNum = arr[i][0]
+      let row = i
+      let col = 0
+      
+      while(arr[row] && arr[row][col] !== undefined ) {         
+          if (arr[row][col] !== curNum) return false;
+          row++;  
+          col++;  
+      }
+  }
+  
+  return true;
+}
