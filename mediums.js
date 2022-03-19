@@ -1332,3 +1332,26 @@ var isValidSudoku = function(board) {
     
     return true;
 }
+
+///combination sum
+
+var combinationSum = function(candidates, target) {
+    let resultArr = []
+    dfs(candidates, target, resultArr);
+    return resultArr;
+};
+
+function dfs(candidates, target, resultArr, cur=0, curCombination=[]) {
+    if (target < cur) return;
+    
+    if (target === cur) {
+        resultArr.push(curCombination.slice());
+        return;
+    }
+
+    for(let i = 0; i<candidates.length; i++) {
+        curCombination.push(candidates[i])
+        dfs(candidates.slice(i), target, resultArr, cur+candidates[i], curCombination);
+        curCombination.pop()
+    }
+}
