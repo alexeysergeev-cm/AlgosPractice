@@ -1297,3 +1297,38 @@ var longestPalindromeSubseq = function(s) {
     console.log(table)
     return table[0][s.length-1]
 };
+
+
+//valid sudoku
+
+var isValidSudoku = function(board) {
+    let row = {}
+    let col = {}
+    let box = {}
+    for(let i = 0; i < board.length; i++) {
+        row[i] = []
+        col[i] = []
+        box[i] = []
+    }
+    
+    for(let i = 0; i < board.length;i++){
+        for(let j = 0; j<board[i].length;j++) {
+            let num = board[i][j];
+            
+            if (num === ".") {
+                continue;
+            }
+            
+            let boxIdx = Math.floor(i/3) * 3 + Math.floor(j/3);
+            if (row[i].includes(num) || col[j].includes(num) || box[boxIdx].includes(num)) {
+                return false;
+            }
+            
+            row[i].push(num)
+            col[j].push(num)
+            box[boxIdx].push(num)
+        }
+    }
+    
+    return true;
+}
